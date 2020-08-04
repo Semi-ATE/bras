@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+<HEAD>
+<TITLE>bras --- Rule Based Command Execution</TITLE>
+
+<LINK REL="icon" HREF="favicon.png" TYPE="image/png">
+<LINK REL="SHORTCUT ICON" HREF="favicon.png" TYPE="image/png">
+
+
+</HEAD>
+<BODY>
+<H1 align=center>bras<br/>Rule Based Command Execution</H1>
+  <table width="100%">
+   <tr><td rowspan="2" valign="top" width="10%">
+
+     <table bgcolor="#ffd700" rules="rows" border="1">
+      <tr><td>Current Version is |VERSION|.</td></tr>
+      <tr><td>Download most recent: <a href="http://download.berlios.de/bras/bras-|VERSION|.tar.gz">bras-|VERSION|.tar.gz</a></td></tr>
+      <tr><td><a href="CHANGES">CHANGES</a></td></tr>
+      <tr><td>Documentation<br>
+        manual:
+	(<a href="bras.pdf">pdf</a>) (<a href="bras.ps">ps</a>)<br>
+          command line:<a href="bras.1.html">bras.1</a>
+      </td></tr>
+      <tr><td><a href="http://developer.berlios.de/project/filelist.php?group_id=233">older versions</a></td></tr>
+
+      <tr><td>Hosted by<br>
+        <a href="http://developer.berlios.de/projects/bras/">
+          <img align=center src="http://developer.berlios.de/sflogo.php?group_id=233&type=1" width="118" height="52" border="0" alt="BerliOS Logo">
+        </a></td></tr>
+     </table>
+    </td>
+   
+    <td>
+     <table xwidth="60%" cellpadding="4px">
+      <tr><th align="center" colspan="2">What is it?</th></tr>
+      <tr>
+       <td valign="top"><hr width="20px"/></td>
+       <td align="justify">
+	<code>Bras</code> helps to keep files, or <em>targets</em>,
+	up-to-date with respect to a set of <em>dependencies</em>. For
+	every target, a <em>rule</em> describes what it means for the
+	target to be out-of-date and what has to be done to refresh
+	it.</td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+
+   <tr><td>
+     <table xwidth="60%" cellpadding="4px">
+      <tr>
+       <th align="center" colspan="2">Why not <code>make</code>?</th>
+      </tr>
+      <tr>
+       <td valign="top"><hr width="20px"/></td>
+       <td align="justify">While <code>make</code> is probably the
+	application most often used in *nix software development, I
+	guess everyone who has written <code>makefile</code>s would
+	agree that <code>make</code> has a few very odd features. My
+	personal "favorite" misfeatures of <code>make</code> are:
+	<ul>
+	 <li>ugly mix of shell-syntax with <code>make</code>s
+	  own syntax,</li>
+	 <li>confusing way to expand macros and</li>
+	 <li>incomplete handling of dependence relations spanning
+	  multiple directories (see 
+	  <a href="http://www.pcug.org.au/~millerp/rmch/recu-make-cons-harm.html">Recursive Make Considered Harmful</a>).</li>
+	</ul>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+
+  <h3>Features</h3>
+  <dl>
+   <dt>up-to-date'ness</dt><dd>Conditions which test whether a target
+    is out-of-date with respect to its dependencies can be freely
+    defined; currently implemented tests include <code>older</code>,
+    <code>md5older</code>, <code>updated</code>.</dd>
+
+   <dt>multiple directories</dt><dd><code>Bras</code> can follow
+    targets into other directories. It acts there according to the
+    local <code>brasfile</code> to update the target and then reports
+    the result back. Because no recursive execution of
+    <code>bras</code> is necessary, the result of the reasoning for
+    that other directory is not lost.</dd>
+
+   <dt>non-file targets</dt><dd>Targets need not be files. In fact a
+    target is just a name. It depends on the rules formulated for the
+    target of how that name is used.</dd>
+
+   <dt>pattern rules</dt><dd>Pattern rules automatically derive
+    dependencies and thereby patterns via freely definable
+    functions. <code>Make</code>'s suffix rules are implemented as a
+    trivial special case.</dd>
+
+   <dt>consistent syntax</dt><dd><code>Bras</code> is implemented in
+    Tcl. Rules can be mixed with procedural parts. In particular
+    control structures can be used to automatically collect lists of
+    targets, find out platform specifics or selectively activate
+    rules.</dd>
+
+   <dt>module</dt><dd>While <code>bras</code> is normally started on
+    the command line, the whole rule evaluation functionality is
+    available as a Tcl module and can even be used in a GUI-based
+    application implemented in Tcl/Tk.</dd>
+   </dl>
+
+  <h3>One very tiny example</h3>
+
+  <p>The best way to get an idea of how <code>bras</code> works is to
+   download the distribution and look at some of the files in the
+   <code>examples</code> subdirectory. Nevertheless I'll give a three
+   liner here:<pre>
+   set SRC [glob *.c] 
+   Make hello {[older hello $SRC]} {
+     cc -o hello $SRC
+   }</pre></p>
+
+  <p>The first line collects all .c-files in the current
+  directory. The 2nd line says that to make target <code>hello</code>
+  bras must test if that file is older than any in list just
+  collected. If it is the case, the compiler is started to update
+  <code>hello</code>.</p>
+<HR>
+
+<p>Please send comments and suggestions to <a
+href="mailto:pifpafpuf@gmx.de">Harald Kirsch</a>.
+
+
+</BODY>
+</HTML>

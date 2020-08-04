@@ -1,0 +1,118 @@
+########################################################################
+#
+# Demonstrates the use of the pattern rule for installing files, where
+# installing means:
+#   create target directory, if necessary
+#   copy file
+#   set permissions
+#
+# HOW TO USE:
+# -- make sure you have WRITE PERMISSION in the CURRENT DIR
+# -- run bras (e.g. as `../../bras' or, after installation, `bras')
+# -- touch or delete some of the generated `doodoo'-files or run bras
+#    for target `clean'
+# -- run bras again
+# -- check the installed files in ./bin and ./doc
+# -- run bras with option -d to see the reasoning process
+#
+# AND:
+# -- read the comments in this file to learn what is going on
+#
+# (C) 2001 Harald Kirsch
+# $Revision: 1.1 $ $Date: 2001/09/09 16:42:11 $
+########################################################################
+
+# The pattern rule we want to demonstrate here.
+include [file join $::bras::base install.rule]
+
+
+# We intend to install a binary file in a directory denoted by BINDIR
+# and some documentation into DOCDIR. The two directories are
+# subdirectories of the current directory, but in a real application
+# they would of course be somewhere else.
+
+set BINDIR ./bin
+set DOCDIR ./doc
+
+
+# Now we prepare a list of target files which must be installed. The
+# binary file is `doodoo' and the documentation files are `doodoo.ps'
+# and `doodoo.pdf'. Note how the file permissions are attached to the
+# target files.
+
+# In a real application, the following lines would rather be handled
+# by a foreach over a longer list of files.
+
+set INSTALLTARGETS {}
+lappend INSTALLTARGETS \
+    [file join $BINDIR doodoo 0744] \
+    [file join $DOCDIR doodoo.ps 0644] \
+    [file join $DOCDIR doodoo.pdf 0644]
+
+    
+# This is our main rule. It triggers consideration of all the
+# INSTALLTARGETS. The `puts' is only for demonstration. Normally you
+# would use the pseudo command `.relax.', because the target `install' 
+# is only a trigger but has no work to do.
+Make install {[updated $INSTALLTARGETS]} {
+  puts "some targets where made"
+}
+
+# Note that we need no rule to describe how e.g. `./bin/doodoo'
+# depends on `./doodo'. It suffices that in the above rule the
+# predicate `updated' triggers consideration of
+# `./bin/doodo/0744'. The dependence on `./doodoo' is exactly what is
+# introduced automagically by the pattern rule included with
+# `install.rule'.
+
+
+# However, the files to be installed must be made somehow. There is no
+# magic to pick them out of blue air. In real life this triggers the
+# whole built process for your application, but here we do the most
+# trivial built possible by creating the dependencies as empty files.
+Exist doodoo {
+  close [open $target w]
+}
+Exist doodoo.ps {
+  close [open $target w]
+}
+Exist doodoo.pdf {
+  close [open $target w]
+}
+
+# Assume doodoo is a script and we need to edit BINDIR into it just
+# before it is installed. If fixed script has suffix .fixed, it is
+# automatically preferred by the installation pattern rule. Check it
+# by looking into bin/doodoo or by running bras with option -d.
+Newer doodoo.fixed doodoo {
+  set in [open [lindex $deps 0]]
+  set out [open $target w]
+  puts $out "BINDIR=$BINDIR";			#  this is the fix
+  while {-1!=[gets $in line]} {
+    puts $out $line
+  }
+  close $in
+  close $out
+}
+
+
+
+# clean up the mess
+Always clean {} {
+  set l [glob -nocomplain doodoo* bin doc]
+  if {[llength $l]} {
+    eval file delete -force -- $l
+  }
+}
+
+# luser check
+if {![file writable .]} {
+  append msg \
+      "--- OOOPS ---\n" \
+      "  This example has to create several files in the current\n" \
+      "  directory. However, the current directory is not writable.\n" \
+      "  Please change the directory permissions or copy the\n" \
+      "  example to a writable directory."
+  puts stderr $msg
+  exit 1
+}

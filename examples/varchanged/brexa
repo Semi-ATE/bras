@@ -1,0 +1,136 @@
+#!/bin/sh
+#\
+exec wish8.0 $0 "$@"
+########################################################################
+#
+# This is an example gui put on top of a brasfile. It demonstrates how 
+# the reasoning engine of bras can be invoked over and over again and
+# how certain rules are triggered by the mere change of an internal
+# variable. 
+#
+# Run this with something like
+#   wish brexa
+#
+# (C) 2000 Harald Kirsch (kirschh@lionbioscience.com)
+# $Id: brexa,v 1.2 2001/12/30 08:55:41 pifpafpuf Exp $
+########################################################################
+##
+## If this seems to be run from the uninstalled sources, try to fetch
+## bras from the source tree two levels above.
+##
+if {[file exist [file join .. .. bras.tcl]]} {
+  set auto_path [concat [file join .. ..] $auto_path]
+}
+
+package require bras
+namespace import ::bras::*
+
+## This is how we read the brasfile. We use include because this sets
+## up a namespace for that file
+include @.
+########################################################################
+##
+## By reimplementing ::bras::report, bras' messages are directed into
+## the text widged referenced here by $REPORT
+##
+proc ::bras::report {type text {newline 1}} {
+  global REPORT
+  catch {
+    $REPORT insert end $text
+    if {$newline} {
+      $REPORT insert end \n
+    }
+  } msg
+}
+########################################################################
+##
+## This invokes the reasoning engine on the given target.
+##
+proc run {target} {
+  global FLAGS REPORT
+  $REPORT delete 1.0 end
+  ::bras::configure -ve $FLAGS(ve)
+  ::bras::configure -d $FLAGS(d)
+  ::bras::forget
+  if {[catch {::bras::consider $target} msg]} {
+    ::bras::trimErrorInfo
+    ::bras::report x $::errorInfo
+  } elseif {!$msg} {
+    ::bras::report x "\# nothing to be done."
+  }
+}
+########################################################################
+proc nentry {name text} {
+  frame $name
+
+  label $name.l -text $text
+  entry $name.e
+
+  pack $name.l $name.e -side left
+  return $name
+}
+########################################################################
+
+proc gui {w} {
+  frame $w.change -bd 5 -relief groove
+  label $w.lchange -fg red -text \
+      "Change the conditions which trigger recompilation."
+
+  label $w.lcflags -text CFLAGS:
+  entry $w.ecflags -textvariable ::CFLAGS
+  button $w.delc -text "delete hello.c" -command {
+    file delete -force hello.c
+  }
+  button $w.delo -text "delete hello.o" -command {
+    file delete -force hello.o
+  }
+  button $w.del -text "delete hello" -command {
+    file delete -force hello
+  }
+  button $w.deloc -text "delete hello.o.cache" -command {
+    file delete -force hello.o.cache
+  }
+  grid $w.lchange -in $w.change -row 0 -column 0 -sticky w -columnspan 6
+  grid $w.lcflags -in $w.change -row 1 -column 0 -sticky e
+  grid $w.ecflags -in $w.change -row 1 -column 1 -sticky w 
+  grid $w.delc    -in $w.change -row 1 -column 2 -sticky w 
+  grid $w.delo    -in $w.change -row 1 -column 3 -sticky w 
+  grid $w.del     -in $w.change -row 1 -column 4 -sticky w 
+  grid $w.deloc   -in $w.change -row 1 -column 5 -sticky w 
+  grid columnconfigure $w.change 1 -weight 1
+
+
+  frame $w.output -bd 5 -relief groove
+  label $w.loutput -fg red -text \
+      "Select the type of output produced."
+  checkbutton $w.ve -text "verbose exec (-ve)" -variable FLAGS(ve)
+  checkbutton $w.d -text "debug (-d)" -variable FLAGS(d)
+  set ::FLAGS(d) 1
+
+  grid $w.loutput -in $w.output -row 0 -column 0 -sticky w -columnspan 3
+  grid $w.ve      -in $w.output -row 1 -column 0
+  grid $w.d       -in $w.output -row 1 -column 1
+  grid columnconfigure $w.output 2 -weight 1
+
+  frame $w.buttons
+  button $w.run -text "consider target `hello'" -command {run hello}
+  button $w.clean -text "consider target `clean'" -command {run clean}
+  pack $w.run $w.clean -in $w.buttons -side left
+
+  global REPORT 
+  set REPORT [text $w.report]
+  grid $w.change  -row 1 -column 0 -sticky ew
+  grid $w.output  -row 2 -column 0 -sticky ew
+  grid $w.buttons -row 5 -column 0
+  grid $w.report  -row 6 -column 0 -sticky news
+  grid columnconfigure [winfo parent $w.d] 0 -weight 1
+  grid rowconfigure [winfo parent $w.d] 6 -weight 1
+}
+########################################################################
+
+gui {}
+
+
+### Local Variables: ###
+### mode:tcl ###
+### End: ###

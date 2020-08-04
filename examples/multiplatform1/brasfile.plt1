@@ -1,0 +1,34 @@
+########################################################################
+# The rules of this file are invoked by ../brasfile via
+# @plt1/main. This is expanded via pattern rules in c2o.rule which
+# were included already in ../brasfile.
+#
+# (C) 2001 Harald Kirsch
+#
+# $Revision: 1.2 $, $Date: 2002/01/06 15:19:08 $
+########################################################################
+
+## Set up the built-environment, e.g. things like CC and CFLAGS
+##
+## Note that since bras-2.0 these are variables local to 
+##   [namespace current]
+## a namespace set up for this directory automaticly.
+set PLATMSG "Good does not play dice."
+getenv CC gcc
+getenv CFLAGS "-O2 -W -Wall"
+lappend CFLAGS "-DPLATMSG=\"$PLATMSG\""
+getenv DEPOPTS {-M -MG};  # let C compiler issue  dependencies 
+getenv LDFLAGS {}
+getenv LDLIBS {}
+
+## Fetch some generally valid vars from our parent directories
+## namespace 
+linkvar INCLUDES ..
+
+## This makes sure that source files are found.
+searchpath {. ../src}
+
+
+Always clean {} {
+  eval file delete [glob -nocomplain *.o *.dc *~] shutupfiledelete
+}

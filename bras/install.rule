@@ -1,0 +1,85 @@
+########################################################################
+#
+# This file is part of bras, a program similar to the (in)famous
+# `make'-utitlity, written in Tcl.
+#
+# Copyright (C) 1996, 1997, 1998, 1999, 2000 Harald Kirsch
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+########################################################################
+
+# How to compile install files
+
+########################################################################
+#
+# The rule matches targets which have at least two path separators and
+# a tail which looks like an octal permission code, e.g.
+#    somedir/myProgram/0744
+# The target is made dependend on a file in the local directory
+# (rather its search path) with basename derived after stripping the
+# permission code. The dependency is then copied onto the target and
+# the permissions are set as requested.
+#
+# Example: 
+#   include [file join $::bras::base install.rule]
+#   Make all {[updated /usr/bin/bras/0755]} .relax.
+#
+# When asked to consider target `all', bras will consider
+# `/usr/bin/myprog/0755'. By means of the rule defined below, it makes
+# it dependend on `myprog'. If it is newer than `/usr/bin/myprog', it
+# is installed with the given permissions.
+#
+########################################################################
+
+## The proc to derive the dependency
+proc ::bras::gendep::install {target} {
+  return [file tail [file dir $target]]
+}
+
+## match a target with at least three parts, the last one looking like 
+## an octal permission code
+PatternMake [file join .* .* {0[0-9][0-9][0-9]}] install {
+  [older [file dir $target] $d]
+} {
+  set perm [file tail $target]
+  set target [file dir $target]
+  ::bras::install $target [lindex $deps 0] $perm
+}
+
+## In a 2nd version, the local file is expected to have suffix .fixed
+## supposedly because it results from a late fix just before it is
+## installed. A typical fix is some string editing in documentation
+## or script files reflecting the actual installation directory.
+#
+## The proc to derive the dependency
+proc ::bras::gendep::install.fixed {target} {
+  return [file tail [file dir $target]].fixed
+}
+
+## match a target with at least three parts, the last one looking like 
+## an octal permission code
+PatternMake [file join .* .* {0[0-9][0-9][0-9]}] install.fixed {
+  [older [file dir $target] $d]
+} {
+  set perm [file tail $target]
+  set target [file dir $target]
+  ::bras::install $target [lindex $deps 0] $perm
+}
+
+########################################################################
+##### Local Variables: #
+##### mode:tcl #
+##### End: #

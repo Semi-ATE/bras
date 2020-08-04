@@ -1,0 +1,25 @@
+WHAT IS bras?
+
+Bras is intended to do roughly the same job as the (in)famous
+`make'-utitlity. It executes commands according to a set of rules.
+
+Although I am quite happy with `make' most of the time, it has some
+rough edges which I really dislike. Therefore I decided the other day
+that I want to have my own little tool without the rough edges. The
+result is bras.
+
+Main features are:
+o rule-controlled command execution, similar to make;
+o written in Tcl, no compilation required;
+o Tcl-syntax so that commands associated with rules may contain
+  control structures;
+o dependencies in foreign directories can trigger sourcing rule files
+  in that directory, recursive bras-execution is not necessary;
+o just any boolean expression can describe, when a target is out-of-date
+o pattern rules which deserve the name;
+o reasoning engine can also be used within Tk-applications   
+
+Send comments and requests for enhancements to 
+pifpafpuf@gmx.de .
+The homepage ob bras is at http://bras.berlios.de/ .
+

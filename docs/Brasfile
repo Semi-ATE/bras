@@ -1,0 +1,97 @@
+########################################################################
+#
+# $Revision: 1.5 $, $Date: 2002/02/24 11:53:50 $
+########################################################################
+
+## An attempt to make a .tex->.pdf rule
+
+namespace eval ::bras::p {
+  namespace export needpdflatex indolder
+
+  ## Note: target may be an .idx as well as a .pdf
+  proc needpdflatex {target tex} {
+    installPredicate [list trigger deps] [list tex]
+    
+    if {[older $target $tex]} {
+      return 1
+    }
+    
+    ::bras::lappendUnique deps $tex
+
+    ## if .log does not exist, make
+    set log [file root $tex].log
+    if {![file exist $log]} {
+      ::bras::lappendUnique trigger $log
+      append reason "\nlog file `$log' does not exist"
+      return 1
+    }
+    
+    ## check for  "Label(s) may have changed" in logfile
+    set in [open $log]
+    set res 0
+    while {-1!=[gets $in line]} {
+      if {[regexp {Label[(]s[)] may have changed} $line]} {
+      set res 1
+	::bras::lappendUnique trigger $log
+	append reason "\nlabel(s) may have changed"
+	break
+      }
+    }
+    return $res
+  }
+  ######################################################################
+  proc indolder {ind idx} {
+
+    set l [list $idx]
+    set ist [file root $idx].ist
+    if {[file exist $ist]} {
+      lappend l $ist
+    }
+    return [older $ind $l]
+  }
+}
+namespace import ::bras::p::needpdflatex ::bras::p::indolder
+
+PatternMake {.*[.](dvi|pdf|idx|aux|toc)} .tex {
+  [needpdflatex $target $d]
+} {
+  if {[string match *pdf $target]} {
+    set latex pdflatex
+  } else {
+    set latex latex
+  }
+  if {[catch {$latex -interaction=batchmode [lindex $deps 0]} msg]} {
+    file delete -force $target
+    error "$latex returned an error: check logfile to find out more"
+  }
+  puts "Just ran $latex for $target"
+  ::bras::consider $target
+}
+
+
+PatternMake {.*[.]ind} .idx {
+  [or [missing $target] [md5older $target $d]]
+} {
+  if {[llength $deps]==2} {
+    makeindex -q -s [lindex $deps 1] [lindex $deps 0]
+  } else {
+    makeindex -q [lindex $deps 0]
+  }
+  ## Well, we have to consider it again, due to the strange behaviour
+  ## of tex
+  file delete -force [file root $target].log
+  ::bras::forget [lindex $deps 0]
+  ::bras::consider $target
+}
+
+Newer bras.ind bras.ist
+
+#Newer bras.pdf bras.ind
+Make bras.pdf {
+  [or [missing $target] [md5older $target {bras.aux bras.toc bras.ind}]]
+}
+
+
+Newer bras.ps bras.dvi {
+  dvips -q bras
+}

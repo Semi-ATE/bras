@@ -1,0 +1,99 @@
+########################################################################
+#
+# Demonstrates the definition and use of a newly defined
+# predicate. Read the source and run with
+#
+# ../../bras -d clean F='files'
+#   or with
+# bras -d clean F='files'
+#
+# where files is a list of files you want to delete. Note how the
+# deletion is only invoked for files which actually exist. You
+# definitely want to read the code below. Just running this example
+# demonstrates almost nothing.
+#
+#
+#          SKIP TO >>INTERESTING CODE<< below
+#
+#
+# (C) 2000 Harald Kirsch (kirschh@lionbioscience.com)
+#
+# $Id: brasfile,v 1.4 2002/01/06 15:19:08 pifpafpuf Exp $
+########################################################################
+
+## If you set F=file on the command line, F can be found in the
+## environment. Otherwise you loose.-)
+proc usage {} {
+  global argv0
+  foreach x {a.xx b.xx} {
+    catch {set in [open $x w]; close $in}
+  }
+  puts stderr "usage: $argv0 clean F=..."
+  puts stderr "  where ... is a list of files you want to delete."
+  puts stderr "  To guard against unwanted deletion of important files,"
+  puts stderr "  the filenames you give must all match *.xx"
+  puts stderr "  Actually I just created a.xx and b.xx for you to"
+  puts stderr "  delete now. Just run:"
+  puts stderr "    $argv0 -d clean F='a.xx b.xx notthere.xx'"
+  puts stderr "\n  Note: the point is not to run this example but to"
+  puts stderr "  read the code in brasfile and see how it works.-)"
+  exit 1
+}
+if {![info exist env(F)] } usage
+foreach f $env(F) {
+  if {![string match *.xx $f]} usage
+}
+########################################################################
+
+##
+##        >>INTERESTING CODE<<
+##
+
+##
+## This is the new predicate. It returns 1 (true) if the tested file
+## exists. We define a new predicate instead of just using [file
+## exist] to make sure that we get nice reports when bras is called
+## with -d.
+## New predicates must always be defined in and exported from
+## ::bras::p. 
+namespace eval ::bras::p {namespace export fileexists}
+proc ::bras::p::fileexists {files} {
+
+  ## The next line allows us to set variable trigger in a way that we
+  ## can find it the command associated with a rule that calls this
+  ## predicate. See (NOTE 1) below.
+  ::bras::p::installPredicate [list trigger]
+
+  set result 0
+  foreach file $files {
+    if {[file exist $file]} {
+      ## The file exists, so we record a reason why this predicate
+      ## will return true now. Note that for good formatting the
+      ## reason line must start with \n
+      append reason "\n`$file' exists"
+      
+      ## Because the given file was one reason why this predicate will
+      ## return true, we add it to the list of triggers.
+      ::bras::lappendUnique trigger $file
+      set result 1
+    } 
+  }
+
+  return $result
+}
+
+## 
+## Now we want to use the new predicate. We explicitely built a rule
+## to test the files listed in env(F).
+##
+Make clean {[fileexists $env(F)]} {
+  ## (NOTE 1) As mentioned above, trigger now contains only those
+  ## files which actually exist and therefore must be deleted.
+  foreach f $trigger {
+    file delete $f
+    puts "deleted `$f'"
+  }
+}
+  
+
+

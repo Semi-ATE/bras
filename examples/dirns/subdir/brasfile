@@ -1,0 +1,34 @@
+########################################################################
+#
+# Second part of the example to demonstrates that brasfiles in
+# different directories enclose their rules and commands in different
+# namespaces.
+#
+# (C) 2001,2002 Harald Kirsch
+# $Revision: 1.1 $, $Date: 2001/12/30 08:56:25 $
+########################################################################
+
+# We put the default target at the very top to be able to call
+# `include @..', which otherwise would make the default target of the
+# parent directory our default target here.
+Make all {[updated main_in_subdir]} .relax.
+
+# To be able to also run bras in this directory alone but nevertheless
+# profit from global function definitions and included rules, we need
+# this: 
+include @..
+
+# Here we have our own version of SRC
+set SRC {some.c file.c exit.c}
+
+# We link CFLAGS to the version of the parent directory. 
+linkvar CFLAGS ..
+
+# The above is equivalent to the explicit version below which,
+# however, allows to change the name. The function [dirns] returns the
+# namespace associated with the given directory.
+upvar \#0 [dirns ..]::CFLAGS XYZ
+
+Make main_in_subdir {[p sub]} {
+  showns 1 "--- SUB ---"
+}

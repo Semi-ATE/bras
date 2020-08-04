@@ -1,0 +1,83 @@
+########################################################################
+#
+# An example to show how bras can even be used to recompile if the
+# value of a variable changes. Here we use CFLAGS as an example.
+#
+#
+# (C) 2000 Harald Kirsch (kirschh@lionbioscience.com)
+# $Id: brasfile,v 1.4 2002/01/06 15:19:08 pifpafpuf Exp $
+########################################################################
+
+## We initialize ::CFLAGS from either the environment or the command
+## line or with a default value. 
+getenv ::CFLAGS {-g -W -Wall}
+
+########################################################################
+
+##
+## Here comes the default (main) target. We want to make the
+## executable `hello' which only depends on `hello.o'.
+##
+Newer hello {hello.o} {
+  cc -o $target $deps
+}
+
+##
+## A rule which states that `hello.o' has to be remade if
+## 1) it is older than `hello.c' or
+## 2) the variable ::CFLAGS changed its value with respect to a value
+##    cached in a file.
+##
+## Note the following feature of bras:
+##
+## -- [varchanged] is used to trigger recompilation if the variable
+## ::CFLAGS was changed since the last call. [varchanged] relies on
+## the file $target.cache where the previously used value of ::CFLAGS
+## is stored in Tcl-syntax.
+##
+## -- Instead of the boolean `||'-operator, the predicate [or] is used to
+## make sure that all arguments are really evaluated. This is
+## necessary, to ensure the existance of ::CFLAGS even if the
+## [older]-call already returns 1.
+##
+Make hello.o {
+  [or [older $target hello.c] [varchanged ::CFLAGS $target.cache]]
+} {
+  ## compile the thing
+  cc -o $target -c $CFLAGS hello.c
+
+  ## cache the value of ::CFLAGS used
+  set out [open $target.cache w]
+  puts $out "set ::CFLAGS {$::CFLAGS}"
+  close $out
+}
+  
+
+## Because varchanged checks ::CFLAGS it considers this variable also
+## as a target. Here we tell the reasoning engine that everything is
+## ok. 
+Make ::CFLAGS {![info exist $target]} {
+  puts stderr "this should not happen because we run getenv above"
+}
+
+## We even create our hello.c if it does not exist
+Exist hello.c {
+  set out [open hello.c w]
+  puts $out {
+    #include <stdio.h>
+    #include <stdlib.h>
+    int main(void) {
+      printf("hello world.\n");
+      exit(EXIT_SUCCESS);
+    }
+  }
+  close $out
+}
+  
+## A rule to delete all the stuff we generate.
+Always clean {} {
+  set l [glob -nocomplain hello*]
+  if {[llength $l]} {
+    eval file delete -force $l
+  }
+}

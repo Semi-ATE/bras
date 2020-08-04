@@ -1,0 +1,51 @@
+
+			      ANNOUNCING
+			     --- bras ---
+		     Rule Based Command Execution
+
+I am pleased to announce version 2.3.
+
+WHAT'S NEW?
+
+Handling of rules with multiple targets now always assumes that
+the rule's predicate tests all of the targets in parallel. Previously
+this was only assumed when one of the rule's targets was out-of-date.
+
+Pattern rules for C++.
+
+Some support to compile Java source. See example in the distribution
+as well as keyword "Java" in the doc's index.
+
+
+WHERE CAN I GET IT?
+
+The distribution  can be found at
+   http://bras.berlios.de/
+
+
+WHAT IS IT ANYWAY?
+
+Bras is a rules-based command execution system, ala 'make'. It
+includes a powerful rules system supporting foreign directory
+triggers, multiple rule types, and on-the-fly dependency
+generation. It is written in Tcl and uses Tcl as its script language.
+
+Main features are:
+o rule-controlled command execution, similar to make;
+o written in Tcl, no compilation required;
+o Tcl-syntax so that commands associated with rules may contain
+  control structures;
+o dependencies in foreign directories can trigger sourcing rule files
+  in that directory, recursive bras-execution is not necessary;
+o just any boolean expression can be used to define when a target is
+  out-of-date;
+o pattern rules which allow to derive dependencies and/or commands on
+  the fly;
+o explicit invocation of the reasoning process possible;
+o reasoning engine can be used as a module in Tcl programs;
+
+Send comments and requests for enhancements to
+pifpafpuf@gmx.de .
+ 
+# CVS:
+# $Revision: 1.20 $, $Date: 2002/02/24 11:36:23 $

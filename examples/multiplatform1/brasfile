@@ -1,0 +1,138 @@
+########################################################################
+#
+# An example to demonstrate how Bras can be used to manage separate
+# built directories for different platforms.
+#
+# 1) READ the source of this file. It is heavily documented to
+# demonstrate the principle.
+# 2) Run ../../bras or (after installation) just bras with targets
+# like 
+#   all
+#   platform1
+#   platform2
+#   clean
+# NOTE: This is not tested on MS' platforms. You certainly will have
+# to mess with the CFLAGS (see also plt?/brasfile for that).
+#
+#
+# BACKGROUND:
+#
+# It is assumed, that there exists a common directory `src' which
+# contains the source code and which should not be spoiled
+# with built products.
+#
+# Then there is a subdirectory for every platform where the actual
+# built process takes place. In the example these are plt1 and plt2.
+#
+# The final built products shall be copied into a subdirectories
+# product/plt1 and product/plt2 for them to be picked up easily for
+# shipping. 
+#
+# Read the extensively documented code below to see how things are
+# implemented. Note that there are platform specific brasfiles in plt1 
+# and plt2.
+#
+# Remember: a rule like
+#   Make a b cmd
+# can be best understood as
+#   MAKE A if B holds, and do it by running CMD
+#
+# (C) 2001 Harald Kirsch
+# $Revision: 1.2 $, $Date: 2002/01/06 15:19:08 $
+########################################################################
+
+## The default first rule directs bras to make both platforms. Note
+## that platform1 and platform2 are just target names like `all' and
+## are no directory names.
+Make all {[updated {platform1 platform2}]} {
+  puts "some parts of platform(s) $trigger were made"
+}
+
+## The individual platform-targets are here to allow a built for a
+## selected one by specifying the name on the command line. The two
+## rules that follow define the actual files to be made for a
+## platform. 
+Make platform1 {[updated product/plt1/main]} {
+  # nothing to be done here, just delegating
+}
+Make platform2 {[updated product/plt2/main.exe]} {
+  # nothing to be done here, just delegating
+}
+
+## Each product must be built in its own subdirectory. Note the
+## difference between dependencies with and without leading
+## `@'. Without `@', the dependency is handled by this very brasfile 
+## while those with `@' are handled by the brasfile found in the
+## directory of the dependency, i.e. plt1 and plt2.
+if 1 {
+  Newer product/plt1/main  @plt1/main {
+    file mkdir [file dir $target]
+    file copy -force [lindex $deps 0] $target
+  }
+  Newer product/plt2/main.exe @plt2/main.exe {
+    file mkdir [file dir $target]
+    file copy -force [lindex $deps 0] $target
+  }
+} else {
+  ## An alternative implementation combining the two rules above in a
+  ## more general pattern rule which would apply automatically if more 
+  ## platforms are added. Basically it makes sure that a file
+  ## product/x/y depends on a file x/y and is copied from
+  ## it. Similar to the explicit rule above, the gendep-function
+  ## prefixes the dependency with `@' to direct bras to the respective 
+  ## built-subdirectory.
+  PatternNewer {product/[^/]+/.+} .prod {
+    file mkdir [file dir $target]
+    file copy -force [lindex $deps 0] $target
+  }
+  proc ::bras::gendep::.prod {target} {
+    set rest [lrange [file split $target] 1 end]
+    return @[eval file join $rest]
+  }
+}
+
+
+## Finally a clean target which first delegates cleaning to the
+## subdirectories and then does its own cleanup. 
+Always clean {@plt1/clean @plt2/clean} {
+  eval file delete -force shutup \
+      [glob -nocomplain product plt1 plt2 *~]
+}
+
+
+########################################################################
+
+## In order to spare the additional directories plt1 and plt2 when
+## packing, their brasfiles are kept right here in this directory.
+## When you run this brasfile the first time, they are created and have
+## their brasfiles copied by means of the explicit call to `consider'
+## below. 
+
+Newer plt1/brasfile brasfile.plt1 {
+  file mkdir plt1
+  file copy -force brasfile.plt1 plt1/brasfile
+}
+Newer plt2/brasfile brasfile.plt2 {
+  file mkdir plt2
+  file copy -force brasfile.plt2 plt2/brasfile
+}
+## We explicitly call the reasoning process to set up everthing
+## before even the default target is considered. The rules invoked are 
+## defined above.
+consider [list plt1/brasfile plt2/brasfile]
+
+
+
+########################################################################
+##
+## These serve only for demonstration purposes since they probably
+## don't work on  anything but a *NIX like system.
+##
+include [file join $::bras::base c2o.rule]
+include [file join $::bras::base cdeps.rule]
+include [file join $::bras::base o2x.rule]
+
+## The default rule for the C compiler wants this:
+set INCLUDES {}
+
+########################################################################

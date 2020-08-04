@@ -1,0 +1,35 @@
+
+PREREQUISITES
+
+If you don't have tcl, you are out of luck. You need a Tcl version
+with namespace support, i.e. >= 8.0 .
+
+INSTALLATION
+
+Run the commands (*)
+
+  tclsh bras prefix=/directory/where/to/install
+  tclsh bras install prefix=/directory/where/to/install
+
+to install bras. This will install bras' files in the following
+directories: 
+
+   $prefix/bin
+   $prefix/lib/bras-$VERSION
+   $prefix/doc/bras-$VERSION
+   $prefix/man/man1
+
+Read the top of `brasfile' to see how to individually change these
+directories. 
+
+				That easy?
+					I hope so!
+                                        Harald Kirsch
+
+
+
+------
+(*) You may as well just run the 2nd command. The two of them are
+necessary if the prefix must be different for the two commands, like
+when building a package or using stow (see
+http://www.gnu.org/software/stow/stow.html) 

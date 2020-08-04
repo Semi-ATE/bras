@@ -1,0 +1,72 @@
+########################################################################
+#
+# The example demonstrates the rules in 
+#   c++2o.rule -- to compile a C++ source code into an object file and
+#   c++deps.rule -- to maintain the dependency cache for C++ files.
+# Note that both rule files contain rules for five common suffixes
+# used for C++ source files: .C .cc .cxx .cpp .c++
+#
+# Read the documented code below to see what it does. Running this
+# file with ../../bras is not really exciting if you don't understand
+# what is going on.
+#
+# $Revision: 1.1 $, $Date: 2002/02/26 20:02:57 $
+########################################################################
+
+# We need the following rule files
+include [file join $::bras::base c++2o.rule]
+include [file join $::bras::base c++deps.rule]
+
+##
+## Define some variables used by the rule files
+##
+# name of C++ compiler
+getenv CXX g++
+
+# Option(s) which instruct the compiler to output a rule suitable for
+# make describing the dependencies of an object file. If you use
+# non-standard include files, they must be include here as well as in
+# CXXFLAGS below.
+getenv CXXDEPOPTS {-M}
+
+# a regular expression for dependencies which "never" change
+# anyway. Those dependencies will not show up in the *.dc dependency
+# cache files
+getenv CXXDEPEXCLUDE {^/usr/.*}
+
+# your favorite compiler flags
+getenv CXXFLAGS {-W -Wall -g}
+
+# Flags for the linker
+getenv LDFLAGS -lm
+
+# The list of source files. Normally, all source files would probably
+# have the same extension. I just want to demonstrate at least two
+# suffixes.
+set SRC {main.C other.c++}
+
+# The object files are derived from the source files. If all source
+# files would have the same extension, the regexp would look a bit
+# nicer. 
+regsub -all {[.][^ ]+} $SRC .o OBJ
+
+########################################################################
+
+# The default target depends on the object files. The dependency
+# relations 
+#  .o <- .dc <- .c++, .C
+# to make the object files are automatically maintained by the pattern
+# rules included above.
+
+Make doit {[older $target $OBJ]} {
+  $CXX -o $target $CXXFLAGS $LDFLAGS $deps
+  puts "call ./doit to run the simple example program"
+}
+
+
+# for maintenance only
+Make clean {[true]} {
+  eval file delete -force [glob -nocomplain *.o doit *.dc *~] shutup
+}
+
+

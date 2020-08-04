@@ -1,0 +1,124 @@
+
+
+Until I find the time
+to update the docs,
+here are some notes
+about how searchpath is
+intended to work.
+
+0) The command to set the search path is called `searchpath'. It sets
+a search path which is _LOCAL_ for the current directory.
+
+1) searchpath is used to find dependencies which are neither
+@-dependencies nor absolute (nor volume-relative) path names.
+
+   examples: bla.c ../windows/bla.c build/bla.c
+   non-examples: /usr/local/bla.c @build/bla.c C:bla.c
+
+2) If a dependency is not found along the search path, the first element
+of searchpath is taken as the default. Therefore the current directory,
+i.e. `.', should almost always be the first element of searchpath.
+
+
+3) An explicit dependency, i.e. a dependency mentioned in an explicit
+rule, is _found_ along the search path, if it exists as a file in the
+path. Example:
+
+  searchpath {. unix general}
+  Newer bla.o bla.c
+
+If unix/bla.c exists, this is the depencency actually used in the rule.
+
+  
+4) An implicit dependency, i.e. one which comes into being by
+application of pattern rules is _found_ along the search path if
+
+  a) it exists as a file in the path, or
+  b) it is the target of an explicit rule.
+
+Example:
+  searchpath {. lib unix general}
+  Newer lib/bla.c bla.y
+
+Suppose ./bla.o is considered and there is no rule for it. Assume
+there is a pattern rule `bla.c->bla.o'. The default delivers `bla.c'
+as a possible dependency. If it is found e.g. as unix/bla.c, this is
+taken as the depencency. If it is not found, `lib/bla.c' is taken,
+because it is the target of an explicit rule. 
+
+Following the example further, bla.y might be found as `unix/bla.y'
+resulting in the chain unix/bla.y -> lib/bla.c -> ./bla.o .
+
+If neither (a) nor (b) hold, (2) is the default, i.e. if the
+Newer-rule above does not exist, ./bla.c would be the default
+dependency taken to try to dig deeper into the possibilities of
+pattern rules.
+
+
+How can I build all my targets in a certain new/clean directory?
+================================================================
+
+Suppose a directory structure for coolTool like
+
+   coolTool/windows
+   coolTool/unix
+   coolTool/general
+
+and suppose all of the above are read-only. You therefore want a
+directory coolTool/build were all generated file are collected.
+
+Method A 
+--------
+
+Create a `coolTool/brasfile.build' containing commands like
+   
+   searchpath {. ../windows ../general}
+   Always all {this that and others}
+   Newer this {this.o libcool.a}
+   ...
+
+Then copy it to ./build in your main brasfile and delegate execution
+to it, e.g.
+
+   file mkdir build
+   file copy -force brasfile.build build/brasfile
+   Always all @build/all		;# delegate work
+
+
+Method B
+--------
+
+In your toplevel brasfile have a section which pretends to be sourced
+in while in subdirectory `build':
+
+   file mkdir build
+   set pwd [pwd]
+   cd build	
+     searchpath {. ../unix ../general}
+     Newer all {this that and others}
+     Newer this {this.o libcool.a}
+   cd $pwd		;# preferred over `cd ..' because of soft links
+
+   Always all @build/all		;# delegate work
+
+
+
+What about substructure in source directories?
+==============================================
+
+If the source-directories like ../unix have a substructure,
+e.g. ../unix/lib you may want to keep the substructure in build or you
+may not want to.
+
+To keep the substructure, nothing special has to be done, because all
+relative dependencies are searched, e.g. in the rules relative to
+`build' specified in brasfile.build write
+
+  Newer lib/libcool.a {lib/bla.o lib/bli.o lib/blu.o}
+
+The dependency lib/bla.o will be searched for as ../unix/lib/bla.o,
+etc.
+
+If you don't want to keep the structure, you have to add the
+subdirectories to the search path.
+

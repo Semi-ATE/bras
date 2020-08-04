@@ -1,0 +1,45 @@
+########################################################################
+# The rules of this file are invoked by ../brasfile via
+# @plt2/main.exe. This is expanded via pattern rules in c2o.rule which
+# were included already in ../brasfile.
+#
+# (C) 2001 Harald Kirsch
+#
+# $Revision: 1.2 $, $Date: 2002/01/06 15:19:08 $
+########################################################################
+
+## Set up the built-environment, e.g. things like CC and CFLAGS
+##
+## Note that since bras-2.0 these are variables local to 
+##   [namespace current]
+## a namespace set up for this directory automaticly.
+set PLATMSG "There is no business but show buzzyness."
+getenv CC gcc
+getenv CFLAGS "-g"
+lappend CFLAGS "-DPLATMSG=\"$PLATMSG\""
+getenv DEPOPTS {-M -MG};  # let C compiler issue  dependencies 
+getenv LDFLAGS {}
+getenv LDLIBS {}
+lappend CFLAGS "-DPLATMSG=\"$PLATMSG\""
+
+## Fetch some generally valid vars from our parent directories
+## namespace 
+linkvar INCLUDES ..
+
+## This makes sure that source files are found.
+searchpath {. ../src}
+
+## .exe is not covered by pattern rules in the distribution. Even the
+## following will probably not run on MS. I don't have MS software and
+## cannot test it, sorry.  
+##
+## The rule is invoked by ../brasfile via @plt2/main.exe .
+##
+PatternNewer {.*\.exe} .o {
+  $CC -o $target $CFLAGS $LDFLAGS $deps $LDLIBS
+}
+
+
+Always clean {} {
+  eval file delete [glob -nocomplain *.exe *.o *.dc *~] shutupfiledelete
+}

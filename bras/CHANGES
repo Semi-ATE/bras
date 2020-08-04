@@ -1,0 +1,2575 @@
+** This change log was extracted from `cvs log',
+** sorted by date and written so that identical descriptions
+** are shown only once.
+**                          digestLog
+**                          (C) Harald Kirsch (kir@iitb.fhg.de)
+**                          $Revision: 1.7 $
+**                          $Date: 2002/02/11 18:47:30 $
+-----------------------------------------------------------
+
+Going to ship 2.3.2.
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.44, 2002/03/04 19:13:12;
+-----------------------------------------------------------
+
+Adapted doc for install and linkvar to recent changes.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.40, 2002/03/04 19:12:38;
+-----------------------------------------------------------
+
+Proc to mkdir, copy, set permissions.
+
+applies to:
+/cvsroot/bras/bras/install.tcl, 1.1, 2002/03/04 19:11:37;
+-----------------------------------------------------------
+
+Changed linkvar to allow more than one variable linked in one call.
+Took ::bras::install out into its own file.
+
+applies to:
+/cvsroot/bras/bras/exported.tcl, 1.18, 2002/03/04 19:11:11;
+-----------------------------------------------------------
+
+shipping 2.3.1
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.43, 2002/02/26 20:06:48;
+/cvsroot/bras/bras/Brasfile, 1.34, 2002/02/26 20:06:48;
+-----------------------------------------------------------
+
+Changed name of function to update dependency cache to
+::bras::updateCacheC.
+
+applies to:
+/cvsroot/bras/bras/c++deps.rule, 1.2, 2002/02/26 20:05:21;
+-----------------------------------------------------------
+
+initial checkin. Tiny example to demonstrate C++ compilation.
+
+applies to:
+/cvsroot/bras/bras/examples/c++compile/other.h, 1.1, 2002/02/26 20:02:57;
+/cvsroot/bras/bras/examples/c++compile/other.c++, 1.1, 2002/02/26 20:02:57;
+/cvsroot/bras/bras/examples/c++compile/main.h, 1.1, 2002/02/26 20:02:57;
+/cvsroot/bras/bras/examples/c++compile/main.C, 1.1, 2002/02/26 20:02:57;
+/cvsroot/bras/bras/examples/c++compile/brasfile, 1.1, 2002/02/26 20:02:57;
+/cvsroot/bras/bras/examples/c++compile/.cvsignore, 1.1, 2002/02/26 20:02:57;
+-----------------------------------------------------------
+
+Shipping 2.3
+
+applies to:
+/cvsroot/bras/bras/doc/Brasfile, 1.5, 2002/02/24 11:53:50;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.42, 2002/02/24 11:53:50;
+/cvsroot/bras/bras/Brasfile, 1.33, 2002/02/24 11:53:50;
+/cvsroot/bras/bras/updateCacheC.tcl, 1.2, 2002/02/24 11:53:50;
+/cvsroot/bras/bras/brasfile, 1.10, 2002/02/24 11:53:50;
+-----------------------------------------------------------
+
+multi-target rules, c++ stuff, java stuff.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.39, 2002/02/24 11:37:36;
+-----------------------------------------------------------
+
+annoucing 2.3
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.20, 2002/02/24 11:36:23;
+-----------------------------------------------------------
+
+Helper proc to create a jar file for one (or more) java packages.
+
+applies to:
+/cvsroot/bras/bras/packjar.tcl, 1.1, 2002/02/24 10:21:08;
+-----------------------------------------------------------
+
+Added predicate [pairedolder]. For a pair of lists $targets and
+$dependencies it checks if the i'th target is older than the i'th
+dependency. Useful for .java-compilation if all source files shall be
+compiled by one call to the compiler.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.14, 2002/02/24 10:18:56;
+-----------------------------------------------------------
+
+::bras::cvsknown no longer exported from namespace.
+
+applies to:
+/cvsroot/bras/bras/cvsknown.tcl, 1.4, 2002/02/24 10:16:02;
+-----------------------------------------------------------
+
+Changed behaviour for rules with multiple targets. Before, it was
+already assumed that all targets are updated if a multi-target rule's
+command was run. Now, if one the targets of a multi-target rule is
+considered and found up-to-date, it is assumed that all of them are
+up-to-date.
+
+applies to:
+/cvsroot/bras/bras/consider.tcl, 1.22, 2002/02/24 10:15:07;
+-----------------------------------------------------------
+
+Added bras.1.html and *.fixed.
+
+applies to:
+/cvsroot/bras/bras/.cvsignore, 1.6, 2002/02/24 10:11:57;
+-----------------------------------------------------------
+
+Generalized handling of dependencies for C sources. This allowed to
+use the same mechanism for C++ source. Pattern rules were added for
+the different suffixes around for C++ sources.
+
+applies to:
+/cvsroot/bras/bras/c2o.rule, 1.9, 2002/02/24 10:10:44;
+/cvsroot/bras/bras/cdeps.rule, 1.7, 2002/02/24 10:10:44;
+/cvsroot/bras/bras/updateCacheC.tcl, 1.1, 2002/02/24 10:10:44;
+/cvsroot/bras/bras/makedeps2bras.tcl, 1.1, 2002/02/24 10:10:44;
+/cvsroot/bras/bras/c++deps.rule, 1.1, 2002/02/24 10:10:44;
+/cvsroot/bras/bras/c++2o.rule, 1.1, 2002/02/24 10:10:44;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/favicon.png, 1.1, 2002/02/24 10:07:35;
+-----------------------------------------------------------
+
+Added javacompile.
+
+applies to:
+/cvsroot/bras/bras/examples/README, 1.3, 2002/02/23 18:39:07;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/examples/javacompile/brasfile, 1.1, 2002/02/23 18:38:11;
+/cvsroot/bras/bras/examples/javacompile/B.java, 1.1, 2002/02/23 18:38:11;
+/cvsroot/bras/bras/examples/javacompile/A.java, 1.1, 2002/02/23 18:38:11;
+/cvsroot/bras/bras/examples/javacompile/.cvsignore, 1.1, 2002/02/23 18:38:11;
+-----------------------------------------------------------
+
+Changed Email address.
+
+applies to:
+/cvsroot/bras/bras/README, 1.9, 2002/02/13 20:55:05;
+/cvsroot/bras/bras/doc/bras.tex, 1.38, 2002/02/13 20:55:05;
+/cvsroot/bras/bras/index.html, 1.15, 2002/02/13 20:55:05;
+-----------------------------------------------------------
+
+Will be 2.2.1
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.41, 2002/02/11 19:53:19;
+-----------------------------------------------------------
+
+Option -k to keep going even after an error did not really work. Fixed.
+
+applies to:
+/cvsroot/bras/bras/exported.tcl, 1.17, 2002/02/11 19:53:00;
+-----------------------------------------------------------
+
+Trimmed CHANGES file to record changes only for the last year.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.32, 2002/02/11 19:51:33;
+-----------------------------------------------------------
+
+bras.1.html was not yet fully taken care of.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.31, 2002/01/20 22:05:50;
+/cvsroot/bras/bras/brasfile, 1.9, 2002/01/20 21:59:05;
+-----------------------------------------------------------
+
+About to ship version 2.2
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.40, 2002/01/20 21:45:47;
+-----------------------------------------------------------
+
+Reimplementation of error handling. Instead of having a marker on the
+error stack to denote borders where to fix it, now every relevant
+catch tries to remove parts which are not interesting for the
+user. Therefore trimErrorInfo was replaced by fixErrorInfo.
+
+This behaviour can be switched off by new option -de.
+
+The error handling allowed to remove gobble. Function include can do
+that on its own.
+
+Running user scripts in a given namespace is now centrally handled by
+new function runscript.
+
+Added clean-target to brasfile.
+
+When running rule's commands, Tcl's own [unknown] is no longer used. I
+rolled my own for better error handling.
+
+Added bras.1.html.
+
+Added new pattern rule: lex2c.
+
+applies to:
+/cvsroot/bras/bras/brasfile, 1.8, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/doc/.cvsignore, 1.6, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/bras, 1.40, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/doc/bras.tex, 1.37, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/Brasfile, 1.30, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/consider.tcl, 1.21, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/evalCmds.tcl, 1.20, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/ANNOUNCE, 1.19, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/exported.tcl, 1.16, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/index.html, 1.14, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/makeRule.tcl, 1.12, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/bras.tcl, 1.12, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/bras.1, 1.11, 2002/01/20 21:44:38;
+/cvsroot/bras/bras/lex2c.rule, 1.1, 2002/01/20 21:44:38;
+-----------------------------------------------------------
+
+Fixed long standing bug which prevented sourcedeps to work at all.
+
+applies to:
+/cvsroot/bras/bras/sourceDeps.tcl, 1.12, 2002/01/17 17:37:08;
+-----------------------------------------------------------
+
+Corrected several typos.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.36, 2002/01/17 17:23:47;
+-----------------------------------------------------------
+
+Added documentation files (ps and pdf) to web-site.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.29, 2002/01/09 22:18:15;
+/cvsroot/bras/bras/index.html, 1.13, 2002/01/09 22:18:15;
+-----------------------------------------------------------
+
+Bug fix: bras as a Tcl-package did not work well in with the new
+namespace scheme for directories. Without [include] no namespace was
+set up for any directory. This caused a Tcl-error.
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.39, 2002/01/09 21:20:09;
+/cvsroot/bras/bras/doc/bras.tex, 1.35, 2002/01/09 21:20:09;
+/cvsroot/bras/bras/evalCmds.tcl, 1.19, 2002/01/09 21:20:09;
+/cvsroot/bras/bras/exported.tcl, 1.15, 2002/01/09 21:20:09;
+/cvsroot/bras/bras/makeRule.tcl, 1.11, 2002/01/09 21:20:09;
+-----------------------------------------------------------
+
+Publishing needs an Always rule since there is no good way to check if
+the uploaded stuff is up-to-date.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.28, 2002/01/09 21:18:05;
+-----------------------------------------------------------
+
+Major redesign of homepage.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.12, 2002/01/07 23:55:28;
+-----------------------------------------------------------
+
+Modernized general description a bit.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.18, 2002/01/06 17:17:30;
+-----------------------------------------------------------
+
+Added new predicate md5older.
+
+Rewrote the mechanism to manage individual namespaces for every
+directory. In particular a rule's condition is now executed in a fresh
+namespace which has only the predicates from ::bras::p imported and
+sees all variables in the directory's namespace. Therefore it cannot
+pollute the directory's namespace. Communication of variables like
+trigger, deps to the rule's command is done via another fresh
+namespace, such that those variables can savely be reset after command
+evaluation.
+
+This also allowed to move command evaluation by evalCmd out of
+checkMake back into considerOne, where it belongs. In particular this
+allows to consider the a rule's target again within the rule's command
+thereby enabling kind of a tail recursive handling of the target. Very
+nice for running latex.-)
+
+applies to:
+/cvsroot/bras/bras/examples/varchanged/brasfile, 1.4, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/examples/updated/brasfile, 1.4, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/examples/newpredicate/brasfile, 1.4, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/doc/Brasfile, 1.4, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.38, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/doc/bras.tex, 1.34, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/consider.tcl, 1.20, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile.plt2, 1.2, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile.plt1, 1.2, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile, 1.2, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/evalCmds.tcl, 1.18, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/ANNOUNCE, 1.17, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/exported.tcl, 1.14, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/predicates.tcl, 1.13, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/bras.tcl, 1.11, 2002/01/06 15:19:08;
+/cvsroot/bras/bras/makeRule.tcl, 1.10, 2002/01/06 15:19:08;
+-----------------------------------------------------------
+
+Deleted superflous call to [true].
+
+applies to:
+/cvsroot/bras/bras/c2o.rule, 1.8, 2002/01/06 11:33:13;
+-----------------------------------------------------------
+
+Added favicon-link.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.11, 2001/12/30 16:02:42;
+-----------------------------------------------------------
+
+Removed all settings of global variables. This has to be done on a
+case by case basis in the brasfile itself. Reason: Every brasfile now
+has its own namespace. Obscure preset globals only break the locality
+of variable settings in brasfiles.
+
+applies to:
+/cvsroot/bras/bras/c2o.rule, 1.7, 2001/12/30 16:01:57;
+/cvsroot/bras/bras/cdeps.rule, 1.6, 2001/12/30 16:01:57;
+/cvsroot/bras/bras/cli2ch.rule, 1.4, 2001/12/30 16:01:57;
+/cvsroot/bras/bras/o2x.rule, 1.3, 2001/12/30 16:01:57;
+-----------------------------------------------------------
+
+This went out as 2.0 to berlios.
+
+applies to:
+/cvsroot/bras/bras/.cvsignore, 1.5, 2001/12/30 09:39:22;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.37, 2001/12/30 09:39:22;
+/cvsroot/bras/bras/Brasfile, 1.27, 2001/12/30 09:39:22;
+/cvsroot/bras/bras/ANNOUNCE, 1.16, 2001/12/30 09:39:22;
+-----------------------------------------------------------
+
+Changed URL.
+
+applies to:
+/cvsroot/bras/bras/README, 1.8, 2001/12/30 09:08:53;
+/cvsroot/bras/bras/bras.spec, 1.13, 2001/12/30 09:08:53;
+-----------------------------------------------------------
+
+Added recommendation to use stow.
+
+applies to:
+/cvsroot/bras/bras/INSTALL, 1.5, 2001/12/30 09:06:02;
+-----------------------------------------------------------
+
+Change reflects move to berlios.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.10, 2001/12/30 09:05:15;
+-----------------------------------------------------------
+
+Now all is the default target, not install.
+
+applies to:
+/cvsroot/bras/bras/brasfile, 1.7, 2001/12/30 09:04:30;
+-----------------------------------------------------------
+
+Every brasfile in a multi-directory project is now executed in its own
+namspace. The namespace is anonymous, i.e. autogenerated. The brasfile
+itself, predicates of rules therein and the commands attached to these
+rules are executed in the same namespace which, however, is different
+from the namespaces for other directories. This allows to reuse
+"global" names like SOURCES, OBJ, etc. in every directory's brasfile.
+
+applies to:
+/cvsroot/bras/bras/makeRule.tcl, 1.9, 2001/12/30 09:02:10;
+/cvsroot/bras/bras/bras, 1.39, 2001/12/30 09:02:10;
+/cvsroot/bras/bras/doc/bras.tex, 1.33, 2001/12/30 09:02:10;
+/cvsroot/bras/bras/exported.tcl, 1.13, 2001/12/30 09:02:10;
+/cvsroot/bras/bras/bras.tcl, 1.10, 2001/12/30 09:02:10;
+-----------------------------------------------------------
+
+New example to demonstrate directory-local namespace handling.
+
+applies to:
+/cvsroot/bras/bras/examples/dirns/subdir/brasfile, 1.1, 2001/12/30 08:56:25;
+/cvsroot/bras/bras/examples/dirns/brasfile, 1.1, 2001/12/30 08:56:25;
+-----------------------------------------------------------
+
+Changes to adapt to directory-local namespaces.
+
+applies to:
+/cvsroot/bras/bras/examples/varchanged/brasfile, 1.3, 2001/12/30 08:55:41;
+/cvsroot/bras/bras/examples/varchanged/brexa, 1.2, 2001/12/30 08:55:41;
+-----------------------------------------------------------
+
+This is going to be 1.4.1. I will not be published since it does not
+contain new features.
+
+The file pkgIndex.tcl is no longer autogenerated but prepared by
+hand. It contains now the version number and allows to get rid of
+the file .version.
+
+Finally removed subdirectories Test1, Test2 which were not used for
+quite some time now.
+
+Removed the non-feature of bras being independent of the package. This
+was only a half-solution because it did not take rule-files into
+account.
+
+applies to:
+/cvsroot/bras/bras/brasfile, 1.6, 2001/10/21 17:28:10;
+/cvsroot/bras/bras/bras, 1.38, 2001/10/21 17:28:10;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.36, 2001/10/21 17:28:10;
+/cvsroot/bras/bras/Brasfile, 1.26, 2001/10/21 17:28:10;
+/cvsroot/bras/bras/install.rule, 1.2, 2001/10/21 17:28:10;
+-----------------------------------------------------------
+
+no longer needed
+
+applies to:
+/cvsroot/bras/bras/Attic/dotest, 1.9, 2001/10/21 13:12:53;
+/cvsroot/bras/bras/Test2/Attic/brasfile.14, 1.4, 2001/10/21 13:12:07;
+/cvsroot/bras/bras/Test2/Attic/brasfile.13, 1.4, 2001/10/21 13:12:07;
+/cvsroot/bras/bras/Test2/Attic/brasfile.15, 1.3, 2001/10/21 13:12:07;
+/cvsroot/bras/bras/Test2/Attic/Brasfile, 1.2, 2001/10/21 13:12:07;
+/cvsroot/bras/bras/Test1/Attic/run2.out, 1.3, 2001/10/21 13:11:09;
+/cvsroot/bras/bras/Test1/Attic/run1.out, 1.3, 2001/10/21 13:11:09;
+-----------------------------------------------------------
+
+no longer supported
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.9, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.7, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.7, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.7, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.7, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.6, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.39, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.38, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.37, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.24, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.22, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.17, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.07, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.06, 1.5, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.36, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.35, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.34, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.33, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.28, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.23, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.18, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.16, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.13, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.08, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.04, 1.4, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.43, 1.3, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.41, 1.3, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.40, 1.3, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.45, 1.2, 2001/10/21 13:10:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.44, 1.2, 2001/10/21 13:10:09;
+-----------------------------------------------------------
+
+Changed installation such that bras, the program, is independent of
+the package because it contains it already inline.
+
+applies to:
+/cvsroot/bras/bras/examples/updated/brasfile, 1.3, 2001/10/07 17:38:42;
+/cvsroot/bras/bras/bras.tcl, 1.9, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/makeRule.tcl, 1.8, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/brasfile, 1.5, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/.cvsignore, 1.4, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/bras, 1.37, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.35, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/Brasfile, 1.25, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/consider.tcl, 1.19, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/evalCmds.tcl, 1.17, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/ANNOUNCE, 1.15, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/predicates.tcl, 1.12, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/exported.tcl, 1.12, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.11, 2001/10/07 17:38:35;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.11, 2001/10/07 17:38:35;
+-----------------------------------------------------------
+
+fixed a typo.
+
+applies to:
+/cvsroot/bras/bras/examples/updated/brasfile, 1.2, 2001/10/07 15:04:05;
+-----------------------------------------------------------
+
+*** empty log message ***
+
+applies to:
+/cvsroot/bras/bras/TODO, 1.9, 2001/10/03 16:48:54;
+-----------------------------------------------------------
+
+announcement for 1.3.0.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.14, 2001/09/09 17:11:53;
+-----------------------------------------------------------
+
+This will be version 1.3.0.
+
+Added a pattern rule to install files (install.rule). A target
+description like /usr/bin/bla/0755 is made dependent on the file bla
+in the local directory. If the local file is newer it is copied over
+the target, /usr/bin/bla, and then the permissions are set as
+requested by the suffixed numbers.
+
+This needed a new proc, namely install, which does the copying and
+permission fiddling.
+
+Docs updated accordingly. And example is also available.
+
+applies to:
+/cvsroot/bras/bras/examples/README, 1.2, 2001/09/09 16:42:11;
+/cvsroot/bras/bras/examples/install/brasfile, 1.1, 2001/09/09 16:42:11;
+/cvsroot/bras/bras/examples/install/.cvsignore, 1.1, 2001/09/09 16:42:11;
+/cvsroot/bras/bras/doc/.cvsignore, 1.5, 2001/09/09 16:42:10;
+/cvsroot/bras/bras/doc/bras.tex, 1.32, 2001/09/09 16:42:10;
+/cvsroot/bras/bras/brasfile, 1.4, 2001/09/09 16:42:08;
+/cvsroot/bras/bras/bras, 1.36, 2001/09/09 16:42:08;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.34, 2001/09/09 16:42:08;
+/cvsroot/bras/bras/.cvsignore, 1.3, 2001/09/09 16:42:08;
+/cvsroot/bras/bras/exported.tcl, 1.11, 2001/09/09 16:42:08;
+/cvsroot/bras/bras/install.rule, 1.1, 2001/09/09 16:42:08;
+-----------------------------------------------------------
+
+Changed target pattern to match not only on *.o but also *.obj. Dunno
+if this helps the Windows guys.
+
+applies to:
+/cvsroot/bras/bras/c2o.rule, 1.6, 2001/09/09 16:37:21;
+-----------------------------------------------------------
+
+No longer use postinstall script to edit `which tclsh` into the main
+file. Rather now rely on the usual Tcl hack with #\ exec.
+
+applies to:
+/cvsroot/bras/bras/bras.spec, 1.12, 2001/09/09 16:36:06;
+-----------------------------------------------------------
+
+Version 1.2.0
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.33, 2001/08/04 16:28:36;
+/cvsroot/bras/bras/ANNOUNCE, 1.13, 2001/08/04 16:28:36;
+-----------------------------------------------------------
+
+Implemented .relax. as an explicit do-nothing indicator to be used
+instead of a rule's command.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.31, 2001/08/04 16:19:13;
+/cvsroot/bras/bras/evalCmds.tcl, 1.16, 2001/08/04 16:19:08;
+-----------------------------------------------------------
+
+Demonstrate the use of predicate [updated] together with do-nothing
+marker .relax.
+
+applies to:
+/cvsroot/bras/bras/examples/updated/brasfile, 1.1, 2001/08/04 15:25:38;
+-----------------------------------------------------------
+
+This is going to be 1.1.0.
+
+applies to:
+/cvsroot/bras/bras/doc/Brasfile, 1.3, 2001/07/29 15:19:52;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.32, 2001/07/29 15:19:36;
+/cvsroot/bras/bras/ANNOUNCE, 1.12, 2001/07/29 15:19:36;
+-----------------------------------------------------------
+
+Fixed bug in consider which threw an exception when called immediatly
+from a brasfile with `-d' on.
+
+applies to:
+/cvsroot/bras/bras/exported.tcl, 1.10, 2001/07/29 14:54:42;
+-----------------------------------------------------------
+
+First checkin.
+
+applies to:
+/cvsroot/bras/bras/examples/multiplatform1/src/main.c, 1.1, 2001/07/29 14:52:07;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile.plt2, 1.1, 2001/07/29 14:52:02;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile.plt1, 1.1, 2001/07/29 14:52:02;
+/cvsroot/bras/bras/examples/multiplatform1/brasfile, 1.1, 2001/07/29 14:52:02;
+-----------------------------------------------------------
+
+Added index to documentation. Added doc for predicate `updated'.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.30, 2001/07/29 12:33:51;
+-----------------------------------------------------------
+
+Added function stripAt to bras.tcl which is now called by many
+predicates in order to remove a leading @ from deps so that the @ does
+not show up when the command accesses the dependencies. Also added a
+predicate `updated' which returns true, if any its arguments is
+updated when considered. Insofar it is a subset of the tests performed
+by `older' to be used for targets which don't represent files.
+
+applies to:
+/cvsroot/bras/bras/bras.tcl, 1.8, 2001/07/29 11:21:57;
+/cvsroot/bras/bras/predicates.tcl, 1.11, 2001/07/29 11:21:57;
+-----------------------------------------------------------
+
+Changed usage message.
+
+applies to:
+/cvsroot/bras/bras/examples/newpredicate/brasfile, 1.3, 2001/07/29 11:16:59;
+-----------------------------------------------------------
+
+Fixed bug reported by Scott Gargash: [file dir @c:\bla\bli] does not
+work as I thought on windows.
+
+applies to:
+/cvsroot/bras/bras/bras.tcl, 1.7, 2001/03/20 20:14:20;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.31, 2001/03/20 20:14:20;
+-----------------------------------------------------------
+
+The URL of recu-make-considered-harmful had to be changed.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.29, 2001/01/02 18:34:46;
+-----------------------------------------------------------
+
+scp prints on stderr. Due to the new behaviour of bras, this had to
+be explicitely redirected.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.24, 2001/01/01 19:35:36;
+-----------------------------------------------------------
+
+This is version 1.0.0.
+  Hurra!
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.30, 2001/01/01 19:20:58;
+/cvsroot/bras/bras/ANNOUNCE, 1.11, 2001/01/01 19:20:58;
+-----------------------------------------------------------
+
+An error message generated for rules without any associated command
+was too oldfashioned to work. Corrected.
+
+applies to:
+/cvsroot/bras/bras/evalCmds.tcl, 1.15, 2000/12/31 12:43:42;
+-----------------------------------------------------------
+
+usage message corrected.
+
+applies to:
+/cvsroot/bras/bras/examples/newpredicate/brasfile, 1.2, 2000/12/30 16:54:33;
+-----------------------------------------------------------
+
+bug squashed. running clean in empty dir didn't work.
+
+applies to:
+/cvsroot/bras/bras/examples/varchanged/brasfile, 1.2, 2000/12/30 16:51:38;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/examples/README, 1.1, 2000/12/30 16:50:45;
+-----------------------------------------------------------
+
+It was not taken into account before that a predicate may change to
+another directory. Although this is no good style, it is guarded
+against now.
+
+applies to:
+/cvsroot/bras/bras/makeRule.tcl, 1.7, 2000/12/30 16:40:26;
+-----------------------------------------------------------
+
+Changed the way of how a rule's command is run. It was necessary
+because in case of error in the command, bras could end up in a wrong
+directory. The new way seems to be cleaner anyway.
+
+applies to:
+/cvsroot/bras/bras/evalCmds.tcl, 1.14, 2000/12/30 16:39:31;
+-----------------------------------------------------------
+
+Corrected a bug which was triggered for non-checked in
+subdirectories.
+
+applies to:
+/cvsroot/bras/bras/cvsknown.tcl, 1.3, 2000/12/30 16:37:11;
+-----------------------------------------------------------
+
+added examples.
+
+applies to:
+/cvsroot/bras/bras/brasfile, 1.3, 2000/12/30 16:35:28;
+/cvsroot/bras/bras/bras.spec, 1.11, 2000/12/30 16:34:39;
+-----------------------------------------------------------
+
+Had to call rpm with --quiet because it prints things on stderr
+otherwise. This again triggers an exception within bras after recent
+changes.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.23, 2000/12/30 16:34:26;
+-----------------------------------------------------------
+
+Error handling was thought over again. Variable errorInfo is only cleaned up a bit at hopefully useful places before it is reported to the user. This is done in the function ::bras::trimErrorInfo.
+
+Because many rule-commands don't execute programs, -ve no longer suppresses the message `# making ...'.
+
+Squashed a bug which prevented calling [::bras::configure -ve] two times in a row.
+
+applies to:
+/cvsroot/bras/bras/exported.tcl, 1.9, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/makeRule.tcl, 1.6, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/bras.tcl, 1.6, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/bras, 1.35, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.29, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/evalCmds.tcl, 1.13, 2000/12/30 12:13:31;
+/cvsroot/bras/bras/predicates.tcl, 1.10, 2000/12/30 12:13:31;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/examples/newpredicate/brasfile, 1.1, 2000/12/30 11:56:52;
+/cvsroot/bras/bras/examples/varchanged/brexa, 1.1, 2000/12/30 11:01:38;
+/cvsroot/bras/bras/examples/varchanged/brasfile, 1.1, 2000/12/30 11:01:38;
+/cvsroot/bras/bras/examples/varchanged/.cvsignore, 1.1, 2000/12/30 11:01:38;
+-----------------------------------------------------------
+
+This is 0.99.8
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.28, 2000/09/16 16:22:11;
+-----------------------------------------------------------
+
+added varchanged-example.tcl to /usr/doc/bras...
+
+applies to:
+/cvsroot/bras/bras/bras.spec, 1.10, 2000/09/16 16:21:52;
+-----------------------------------------------------------
+
+Total reimplementation of predicate varchanged. It had a pretty wrong
+design previously. Hopefully it new works as expected.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.28, 2000/09/16 16:12:12;
+/cvsroot/bras/bras/predicates.tcl, 1.9, 2000/09/16 16:12:06;
+-----------------------------------------------------------
+
+source .version always produced an error when there was a new
+version. This should be fixed now.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.22, 2000/09/16 16:10:50;
+-----------------------------------------------------------
+
+this is 0.99.7
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.27, 2000/08/05 15:43:08;
+-----------------------------------------------------------
+
+typo source -> include corrected.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.27, 2000/08/05 15:39:55;
+-----------------------------------------------------------
+
+oldcache did not work in cases where the .dc did not exist and also
+the .c did not exist because it had to be generated. Should work now.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.8, 2000/08/05 15:39:14;
+-----------------------------------------------------------
+
+Option -ve simply did not work.
+
+applies to:
+/cvsroot/bras/bras/bras.tcl, 1.5, 2000/06/28 19:27:59;
+-----------------------------------------------------------
+
+This is 0.99.6
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.26, 2000/06/22 11:38:17;
+-----------------------------------------------------------
+
+VERDATE is now edited into .version when shipping.
+Subdirs Test? are no longer included in .tar.gz
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.21, 2000/06/22 11:38:03;
+-----------------------------------------------------------
+
+During installation, tclsh is taken from [info nameofexecutable].
+
+VERDATE and VERSION are edited into bras.1.fixed.
+
+recu-make-cons-harm.ps.gz is copied to the doc-dir.
+
+applies to:
+/cvsroot/bras/bras/brasfile, 1.2, 2000/06/22 11:36:35;
+-----------------------------------------------------------
+
+Added version string.
+
+applies to:
+/cvsroot/bras/bras/bras.1, 1.10, 2000/06/22 11:35:04;
+-----------------------------------------------------------
+
+The varchanged-predicate did not yet work correctly. It now makes sure
+that reading the cache file, does not change the variables under
+consideration, but only their in-memory cached values.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.7, 2000/06/22 11:34:29;
+-----------------------------------------------------------
+
+Changed doc of predicate varchanged.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.26, 2000/06/22 11:33:00;
+/cvsroot/bras/bras/doc/varchanged-example.tcl, 1.2, 2000/06/22 11:33:00;
+-----------------------------------------------------------
+
+Will go out for 0.99.5
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.10, 2000/05/28 12:08:29;
+-----------------------------------------------------------
+
+Changed email address were necessary.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.6, 2000/05/28 11:54:04;
+/cvsroot/bras/bras/o2x.rule, 1.2, 2000/05/28 11:54:04;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.10, 2000/05/28 11:54:04;
+/cvsroot/bras/bras/index.html, 1.9, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/bras.spec, 1.9, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/exported.tcl, 1.8, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/README, 1.7, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/makeRule.tcl, 1.5, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/cdeps.rule, 1.5, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/c2o.rule, 1.5, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/cli2ch.rule, 1.3, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/cvsknown.tcl, 1.2, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/consider.tcl, 1.18, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/evalCmds.tcl, 1.12, 2000/05/28 11:54:03;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.10, 2000/05/28 11:54:03;
+-----------------------------------------------------------
+
+Added doc for ::bras::report and introduced a pointer to it in the
+tcl-as-a-package section.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.25, 2000/05/28 11:53:30;
+-----------------------------------------------------------
+
+o Added predicate varchanged. With the help of a cache file, it is able
+to check if a parameter stored in an init-file was changed since the
+last invocation. This allows to trigger computations with changes of
+individual values set in a file.
+
+o Added function forget. It tells bras to forget that it has
+considered a given target already. This is most useful in
+GUI-applications which want to reconsider targets, after the user made
+changes to parameters.
+
+o Also for GUI-applications, configuration flag -ve can be reset.
+
+o Again for GUI-applications, all `puts' calls are now routed through
+a central function called `::bras::report' which also gets a parameter
+telling the type of output to produce. By overwriting this function,
+an applications is able to redirect output into a widget.
+
+o Error handling and exiting was streamlined. Bras does no longer
+contain a call to `exit'. Serious errors now throw exceptions. To mark
+the end of the information relevant to the user on the stack, the
+string "---SNIP---" is entered into the error traceback.
+
+o This lead to version 0.99.5.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.24, 2000/05/28 11:19:37;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.9, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/TODO, 1.8, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/exported.tcl, 1.7, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/predicates.tcl, 1.5, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/makeRule.tcl, 1.4, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/bras.tcl, 1.4, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/bras, 1.34, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.25, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/consider.tcl, 1.17, 2000/05/28 11:19:32;
+/cvsroot/bras/bras/evalCmds.tcl, 1.11, 2000/05/28 11:19:32;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/doc/varchanged-example.tcl, 1.1, 2000/05/27 18:48:01;
+-----------------------------------------------------------
+
+Improved handling of initial target. Care is taken to invoke the
+default target from the correct directory, even if the brasfile cd's
+from dir to dir. Before this was simulated by making the default
+target always an @-target, but that was plain wrong.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.33, 2000/05/27 15:18:45;
+/cvsroot/bras/bras/bras.tcl, 1.3, 2000/05/27 15:18:45;
+-----------------------------------------------------------
+
+Implemented `configure -ve 0'.
+Implemented ::bras::forget, which removes selected targets from the
+list of targets already considered. This allows it to retrigger
+target-consideration within a wish-application.
+
+applies to:
+/cvsroot/bras/bras/exported.tcl, 1.6, 2000/05/27 15:16:46;
+-----------------------------------------------------------
+
+pkgIndex.tcl is now made from all .tcl-files rather than from those
+which contain `namespace export'.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.20, 2000/03/22 12:23:02;
+-----------------------------------------------------------
+
+$argv0 replaced by bras in an error message
+
+applies to:
+/cvsroot/bras/bras/consider.tcl, 1.16, 2000/03/22 12:21:51;
+-----------------------------------------------------------
+
+Predicate `missing' tested `info exist' instead of `file exist'.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.4, 2000/03/22 10:41:42;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.24, 2000/03/22 10:41:42;
+-----------------------------------------------------------
+
+This is be 0.99.3.
+Simplified the installation from .tar.gz. No confusing, complicated
+andn error prone GUI anymore.
+
+applies to:
+/cvsroot/bras/bras/bras.spec, 1.8, 2000/03/15 21:36:07;
+/cvsroot/bras/bras/README, 1.6, 2000/03/15 21:36:07;
+/cvsroot/bras/bras/INSTALL, 1.4, 2000/03/15 21:36:07;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.23, 2000/03/15 21:36:07;
+/cvsroot/bras/bras/brasfile, 1.1, 2000/03/15 21:36:07;
+-----------------------------------------------------------
+
+need for examples added.
+
+applies to:
+/cvsroot/bras/bras/TODO, 1.7, 2000/03/15 21:34:46;
+-----------------------------------------------------------
+
+added dir.ttml
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.19, 2000/03/15 21:34:08;
+-----------------------------------------------------------
+
+initial checkin
+
+applies to:
+/cvsroot/bras/bras/dir.ttml, 1.1, 2000/03/15 21:33:39;
+-----------------------------------------------------------
+
+Added link to older versions.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.8, 2000/03/15 21:33:15;
+-----------------------------------------------------------
+
+no longer used.
+
+applies to:
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.8, 2000/03/15 21:29:46;
+/cvsroot/bras/bras/Attic/install.wish, 1.18, 2000/03/15 21:29:46;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.10, 2000/03/15 21:29:46;
+-----------------------------------------------------------
+
+Uuumpf, bras -h didn't work.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.32, 2000/03/14 20:44:28;
+-----------------------------------------------------------
+
+fixed typos.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.9, 2000/03/14 20:40:16;
+-----------------------------------------------------------
+
+Want to publish 0.99.2 now as a beta for 1.0.0.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.8, 2000/03/14 20:23:58;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.22, 2000/03/14 20:23:58;
+-----------------------------------------------------------
+
+Changed a lot of details about publishing. Better (I hope) html in
+index.html.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.7, 2000/03/14 20:04:18;
+/cvsroot/bras/bras/Brasfile, 1.18, 2000/03/14 20:04:18;
+-----------------------------------------------------------
+
+added doc/bras.pdf
+
+applies to:
+/cvsroot/bras/bras/bras.spec, 1.7, 2000/03/14 20:02:03;
+-----------------------------------------------------------
+
+added .version and doc/bras.pdf to the list of installed files.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.17, 2000/03/14 20:01:07;
+-----------------------------------------------------------
+
+added pkgIndex.tcl
+
+applies to:
+/cvsroot/bras/bras/.cvsignore, 1.2, 2000/03/14 20:00:33;
+-----------------------------------------------------------
+
+When -v is used, instead of printing a fixed set of variables,
+all varas in the anonymous namespace in which a command is run
+are now printed.
+
+applies to:
+/cvsroot/bras/bras/evalCmds.tcl, 1.10, 2000/03/14 20:00:20;
+-----------------------------------------------------------
+
+GenDep changed to ::bras::gendep.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.23, 2000/03/14 19:59:10;
+-----------------------------------------------------------
+
+add pdf target
+
+applies to:
+/cvsroot/bras/bras/doc/Brasfile, 1.2, 2000/03/14 19:58:33;
+-----------------------------------------------------------
+
+added short paragraph describing that bras can be used as a package
+now (although this is not yet really tested).
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.22, 2000/03/14 18:09:34;
+-----------------------------------------------------------
+
+initial checkin
+
+applies to:
+/cvsroot/bras/bras/doc/recu-make-cons-harm.ps.gz, 1.1, 2000/03/14 18:08:46;
+-----------------------------------------------------------
+
+added bras.pdf
+
+applies to:
+/cvsroot/bras/bras/doc/.cvsignore, 1.4, 2000/03/14 18:08:26;
+-----------------------------------------------------------
+
+It was not a good idea to evaluate the boolean expressions of a rule
+on a stacklevel other than #0. This is changed now so that the
+expressions can access global variables without problems.
+
+applies to:
+/cvsroot/bras/bras/predicates.tcl, 1.3, 2000/03/14 18:08:09;
+/cvsroot/bras/bras/makeRule.tcl, 1.3, 2000/03/14 18:08:09;
+-----------------------------------------------------------
+
+Added option -p, removed text about -es and -e.
+
+applies to:
+/cvsroot/bras/bras/bras.1, 1.9, 2000/03/14 18:06:16;
+-----------------------------------------------------------
+
+This is a test version to be tried by collegues.
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.21, 2000/03/08 22:39:20;
+-----------------------------------------------------------
+
+Major update reflecting the new type of rules, namely `Make'.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.21, 2000/03/08 22:38:46;
+-----------------------------------------------------------
+
+Adapted to the new way of how variables set in predicates are
+made visible in the command.
+
+applies to:
+/cvsroot/bras/bras/makeRule.tcl, 1.2, 2000/03/08 22:38:13;
+/cvsroot/bras/bras/evalCmds.tcl, 1.9, 2000/03/08 22:37:01;
+-----------------------------------------------------------
+
+Removed a line of debug output.
+
+applies to:
+/cvsroot/bras/bras/consider.tcl, 1.15, 2000/03/08 22:36:14;
+-----------------------------------------------------------
+
+-- Moved the predicates of c2o and cdeps into predicates.tcl.
+
+-- Changed the way how variables to be visible in the command can be
+set in a predicate. Before only trigger and deps could be set. Now any
+variable name can be exported for the command, if it is registered
+with installPredicate.
+
+applies to:
+/cvsroot/bras/bras/cdeps.rule, 1.4, 2000/03/08 22:35:37;
+/cvsroot/bras/bras/c2o.rule, 1.4, 2000/03/08 22:35:37;
+/cvsroot/bras/bras/predicates.tcl, 1.2, 2000/03/08 22:35:37;
+-----------------------------------------------------------
+
+Added declaration of variable ::bras::nspace.
+
+applies to:
+/cvsroot/bras/bras/bras.tcl, 1.2, 2000/03/08 22:32:48;
+-----------------------------------------------------------
+
+This is called 0.99.0 and can be understood as pre-1.0.0.
+
+Major changes have happened:
+
+-- Bras is now be a loadable package. The main script `bras' only serves
+as a front-end with the same functionality as before. But with
+[package require bras] [namespace import ::bras::*] the whole
+machinery can now be made available in just any script, even within
+TclX or a wish. Everthing is (should be) now in namespace ::bras.
+
+-- There are no more different rule types. Only one type of rule
+exists. It has the form
+
+   Make targets boolean-expression command
+
+where a typical example is
+
+   Make bla.o {[older bla.o bla.c]} {
+     cc -o $target [lindex $deps 0]
+   }
+
+which can be translated into English like "make bla.o if bla.o is
+older than bla.c with the given command".
+
+-- To be compatible with previous versions, Newer, Exist and Always
+still exist, but are mappend internally into calls to `Make'.
+
+
+## INCOMPATIBILITIES
+
+-- Since the `boolean-expression'-part can call just about any
+function, it can in particular compute dependencies on the
+fly. Consequently `Defdexpand', a proc previously used to define
+dynamic dependency generators no longer exists. The best way to
+translate this to the new version for a dependency generator called
+`bla' is probably to write a `proc bla' which returns the dependencies
+and then use `Make this [older this [bla]] { }'.
+
+-- Since there are no more rule-types, `Defrule' does no longer
+exist. Instead, a correlating predicate to be used in
+`boolean-expression' must be written.
+
+-- Commands GetDeps, GetCmd, ClearDeps, ClearCmd which allowed direct
+access to the internal rule database are removed. I don't feel they
+are really useful. (Prove me wrong and I'll put them in again.)
+
+## STATUS
+-- Dispite the incompatibilities, two of my projects (one using
+`searchpath') were built with only a slight change in one of them
+caused by the removal of Defdexpand.
+
+-- The docs are not yet updated.
+
+applies to:
+/cvsroot/bras/bras/doc/.cvsignore, 1.3, 2000/03/05 12:37:49;
+/cvsroot/bras/bras/doc/bras.tex, 1.20, 2000/03/05 12:37:49;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.9, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.8, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/evalCmds.tcl, 1.8, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/Attic/dotest, 1.8, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/exported.tcl, 1.5, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/cdeps.rule, 1.3, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/c2o.rule, 1.3, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/consider.tcl, 1.14, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/predicates.tcl, 1.1, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/makeRule.tcl, 1.1, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/cvsknown.tcl, 1.1, 2000/03/05 12:37:28;
+/cvsroot/bras/bras/bras, 1.31, 2000/03/05 12:37:26;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.20, 2000/03/05 12:37:26;
+/cvsroot/bras/bras/Brasfile, 1.17, 2000/03/05 12:37:26;
+/cvsroot/bras/bras/bras.tcl, 1.1, 2000/03/05 12:37:26;
+-----------------------------------------------------------
+
+The functions were incorporated into other files.
+
+applies to:
+/cvsroot/bras/bras/Attic/brasUtils.tcl, 1.2, 2000/03/04 13:30:11;
+-----------------------------------------------------------
+
+These are no longer used because they can be simulated easily
+with the new Make-rule.
+
+applies to:
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.9, 2000/03/04 13:23:27;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.7, 2000/03/04 13:23:27;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.6, 2000/03/04 13:23:27;
+/cvsroot/bras/bras/Attic/defdexpand.tcl, 1.3, 2000/03/04 13:23:27;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.10, 2000/03/04 13:23:27;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.8, 2000/03/04 13:23:26;
+-----------------------------------------------------------
+
+The usage message still contained -r. Removed.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.30, 1999/07/26 09:16:20;
+-----------------------------------------------------------
+
+Ooops, this file was not yet adapted to the new version.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.16, 1999/07/24 18:05:13;
+-----------------------------------------------------------
+
+Again fiddled with the piece of code which actually executes a rule's
+script. The new form allows for better error messages in case of
+broken rule-scripts.
+
+applies to:
+/cvsroot/bras/bras/evalCmds.tcl, 1.7, 1999/07/24 17:11:50;
+-----------------------------------------------------------
+
+Instead of exec'ing cat, I use now open/read/close. Its a bit faster and
+more portable.
+
+applies to:
+/cvsroot/bras/bras/cdeps.rule, 1.2, 1999/07/24 17:10:24;
+-----------------------------------------------------------
+
+Added code to convert a relative ::bras::base to an absolute path.
+
+Changed back handling of newlines within dependency lists. They are just
+squeezed out.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.29, 1999/07/24 17:09:34;
+-----------------------------------------------------------
+
+An Exist had to be adapted to be dependency-free.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.15, 1999/07/24 17:08:04;
+-----------------------------------------------------------
+
+The experimental command markasdone was left over.
+
+applies to:
+/cvsroot/bras/bras/cli2ch.rule, 1.2, 1999/07/24 12:30:50;
+-----------------------------------------------------------
+
+Added section about rule library.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.19, 1999/07/24 11:51:14;
+-----------------------------------------------------------
+
+o2x was still inlined here.
+
+applies to:
+/cvsroot/bras/bras/c2o.rule, 1.2, 1999/07/24 11:50:51;
+-----------------------------------------------------------
+
+I want to publish this soon.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.7, 1999/07/24 11:49:47;
+-----------------------------------------------------------
+
+o There is no longer a difference between finding a whole rule for a
+given target and just looking for a default command. The latter task
+is now identical to the former with the disadvantage that explicitly
+given dependencies cannot guide the search. However, the previous
+method had the disadvantage that it was impossible to guarantee that
+both task behaved consistently with each other.
+
+o The system specific rule files no longer exist and consequently
+option -r' is gone. Those files were never very elaborate or
+accurate. Instead now I start to collect generally useful rules or
+pattern rules in file with suffix .rule. Currently there are
+{c2o,cdeps,cli2ch,o2x}.rule and they can be called like
+
+  source [file join $::bras::base c2o.rule]
+
+o The docs now have a quick reference section.
+
+o Changed again the responsibility for considering all
+dependencies. Every rule type has the freedom to consider all
+dependencies in turn or just ignore them or do whatever is appropriate
+for that type of rule.
+
+... probably even more changes.
+
+applies to:
+/cvsroot/bras/bras/Test2/Attic/brasfile.14, 1.3, 1999/07/24 11:18:36;
+/cvsroot/bras/bras/doc/bras.tex, 1.18, 1999/07/24 11:18:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.39, 1.4, 1999/07/24 11:18:35;
+/cvsroot/bras/bras/Test2/Attic/brasfile.13, 1.3, 1999/07/24 11:18:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.43, 1.2, 1999/07/24 11:18:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.45, 1.1, 1999/07/24 11:18:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.44, 1.1, 1999/07/24 11:18:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.38, 1.4, 1999/07/24 11:18:34;
+/cvsroot/bras/bras/Test1/Attic/brasfile.37, 1.4, 1999/07/24 11:18:34;
+/cvsroot/bras/bras/Test1/Attic/brasfile.35, 1.3, 1999/07/24 11:18:34;
+/cvsroot/bras/bras/Test1/Attic/brasfile.34, 1.3, 1999/07/24 11:18:34;
+/cvsroot/bras/bras/Test1/Attic/brasfile.33, 1.3, 1999/07/24 11:18:34;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.5, 1999/07/24 11:18:33;
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.5, 1999/07/24 11:18:33;
+/cvsroot/bras/bras/Test1/Attic/brasfile.26, 1.5, 1999/07/24 11:18:33;
+/cvsroot/bras/bras/Test1/Attic/brasfile.25, 1.5, 1999/07/24 11:18:33;
+/cvsroot/bras/bras/Test1/Attic/brasfile.28, 1.3, 1999/07/24 11:18:33;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.6, 1999/07/24 11:18:32;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.6, 1999/07/24 11:18:32;
+/cvsroot/bras/bras/Test1/Attic/brasfile.24, 1.4, 1999/07/24 11:18:32;
+/cvsroot/bras/bras/Test1/Attic/brasfile.22, 1.4, 1999/07/24 11:18:32;
+/cvsroot/bras/bras/Test1/Attic/brasfile.17, 1.4, 1999/07/24 11:18:32;
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.5, 1999/07/24 11:18:31;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.5, 1999/07/24 11:18:31;
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.5, 1999/07/24 11:18:31;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.5, 1999/07/24 11:18:31;
+/cvsroot/bras/bras/Test1/Attic/brasfile.16, 1.3, 1999/07/24 11:18:31;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.8, 1999/07/24 11:18:30;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.6, 1999/07/24 11:18:30;
+/cvsroot/bras/bras/Test1/Attic/brasfile.07, 1.4, 1999/07/24 11:18:30;
+/cvsroot/bras/bras/Test1/Attic/brasfile.06, 1.4, 1999/07/24 11:18:30;
+/cvsroot/bras/bras/Test1/Attic/brasfile.04, 1.3, 1999/07/24 11:18:30;
+/cvsroot/bras/bras/o2x.rule, 1.1, 1999/07/24 11:18:25;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.9, 1999/07/24 11:18:24;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.8, 1999/07/24 11:18:24;
+/cvsroot/bras/bras/exported.tcl, 1.4, 1999/07/24 11:18:24;
+/cvsroot/bras/bras/Attic/install.wish, 1.16, 1999/07/24 11:18:24;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.8, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/Attic/dotest, 1.7, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/evalCmds.tcl, 1.6, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.6, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.5, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/Attic/defdexpand.tcl, 1.2, 1999/07/24 11:18:23;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.8, 1999/07/24 11:18:22;
+/cvsroot/bras/bras/consider.tcl, 1.13, 1999/07/24 11:18:22;
+/cvsroot/bras/bras/cli2ch.rule, 1.1, 1999/07/24 11:18:22;
+/cvsroot/bras/bras/cdeps.rule, 1.1, 1999/07/24 11:18:22;
+/cvsroot/bras/bras/c2o.rule, 1.1, 1999/07/24 11:18:22;
+/cvsroot/bras/bras/bras.1, 1.8, 1999/07/24 11:18:21;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.7, 1999/07/24 11:18:21;
+/cvsroot/bras/bras/bras.spec, 1.6, 1999/07/24 11:18:21;
+/cvsroot/bras/bras/bras, 1.28, 1999/07/24 11:18:21;
+/cvsroot/bras/bras/Brasfile, 1.14, 1999/07/24 11:18:20;
+-----------------------------------------------------------
+
+This version is not for public consumption. Major changes have happened and
+all tests work without failure, but the docs are not updated. Even more big
+changes lie ahead and this is merely a freeze of something that is not
+a total mess.
+
+The major changes were:
+o Commands are no longer collected into a long list which is only executed
+  after all reasoning. Instead, commands are executed as soon as they are
+  deemed necessary. This makes many things a lot simpler, but now -d has to
+  executed commands.
+o The rule-interface has changed. Now `consider' recursively considers all
+  dependencies and just passes the result to the rule.
+o A new proc `consider' is made public. It allows to call the reasoning
+  process any time. (This obsoletes prerequisites.)
+o A new proc Defdexpand allows to define procs which convert a given
+  pseudo- or incomplete dependency into the list of true dependencies. The
+  typical example is a.c which can be expanded into all #included files.
+  (This obsoletes DependsFile.)
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.7, 1999/06/03 18:01:08;
+/cvsroot/bras/bras/Test1/Attic/brasfile.18, 1.3, 1999/06/03 18:01:08;
+/cvsroot/bras/bras/Test1/Attic/brasfile.42, 1.2, 1999/06/03 18:01:08;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.9, 1999/06/03 18:01:04;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.8, 1999/06/03 18:01:04;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.7, 1999/06/03 18:01:03;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.7, 1999/06/03 18:01:03;
+/cvsroot/bras/bras/Attic/dotest, 1.6, 1999/06/03 18:01:03;
+/cvsroot/bras/bras/evalCmds.tcl, 1.5, 1999/06/03 18:01:03;
+/cvsroot/bras/bras/exported.tcl, 1.3, 1999/06/03 18:01:03;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.7, 1999/06/03 18:01:02;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.5, 1999/06/03 18:01:02;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.4, 1999/06/03 18:01:02;
+/cvsroot/bras/bras/consider.tcl, 1.12, 1999/06/03 18:01:02;
+/cvsroot/bras/bras/Attic/defdexpand.tcl, 1.1, 1999/06/03 18:01:02;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.6, 1999/06/03 18:01:01;
+/cvsroot/bras/bras/TODO, 1.6, 1999/06/03 18:01:01;
+/cvsroot/bras/bras/bras, 1.27, 1999/06/03 18:01:01;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.19, 1999/06/03 18:01:00;
+-----------------------------------------------------------
+
+DOCTYPE added.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.6, 1999/02/22 09:23:37;
+-----------------------------------------------------------
+
+A major new release with a lots of changes:
+
+o searchpath seems to have a useful state now
+o change whole operation: commands are executed as soon as they appear
+  affects the following:
+  Newer-rule has slightly different semantics
+  Option -d only works alongside normal operation, i.e. it must execute cmds
+  Option -n is only an approximation of what would happen
+o Rule-types may have two or four parameters. Those with four are interested
+  in dependencies and are required to consider them all, those with just
+  two are not interested in dependencies (like Exist, Always).
+o Default output during operation is just the name of the current target.
+  -v requests full command list, -ve enables a verbose exec,
+  -s switches of the default output,
+o rules.Linux won a bit of shape. It has a decent PatternDependsFile
+  and .o depends now on .dep
+
+Docs changed accordingly (I hope).
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.17, 1999/02/21 21:46:42;
+/cvsroot/bras/bras/Test2/Attic/brasfile.15, 1.2, 1999/02/21 21:46:41;
+/cvsroot/bras/bras/Test2/Attic/brasfile.13, 1.2, 1999/02/21 21:46:41;
+/cvsroot/bras/bras/Test1/Attic/brasfile.41, 1.2, 1999/02/21 21:46:41;
+/cvsroot/bras/bras/Test1/Attic/brasfile.39, 1.3, 1999/02/21 21:46:40;
+/cvsroot/bras/bras/Test1/Attic/brasfile.38, 1.3, 1999/02/21 21:46:40;
+/cvsroot/bras/bras/Test1/Attic/brasfile.37, 1.3, 1999/02/21 21:46:40;
+/cvsroot/bras/bras/Test1/Attic/brasfile.40, 1.2, 1999/02/21 21:46:40;
+/cvsroot/bras/bras/Test1/Attic/brasfile.36, 1.3, 1999/02/21 21:46:39;
+/cvsroot/bras/bras/Test1/Attic/brasfile.24, 1.3, 1999/02/21 21:46:39;
+/cvsroot/bras/bras/Test1/Attic/brasfile.22, 1.3, 1999/02/21 21:46:39;
+/cvsroot/bras/bras/Test1/Attic/brasfile.35, 1.2, 1999/02/21 21:46:39;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.6, 1999/02/21 21:46:38;
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.4, 1999/02/21 21:46:38;
+/cvsroot/bras/bras/Test1/Attic/brasfile.17, 1.3, 1999/02/21 21:46:38;
+/cvsroot/bras/bras/Test1/Attic/brasfile.16, 1.2, 1999/02/21 21:46:38;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.4, 1999/02/21 21:46:37;
+/cvsroot/bras/bras/Test1/Attic/brasfile.13, 1.3, 1999/02/21 21:46:37;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.5, 1999/02/21 21:46:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.4, 1999/02/21 21:46:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.4, 1999/02/21 21:46:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.08, 1.3, 1999/02/21 21:46:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.6, 1999/02/21 21:46:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.07, 1.3, 1999/02/21 21:46:35;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.7, 1999/02/21 21:46:31;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.7, 1999/02/21 21:46:31;
+/cvsroot/bras/bras/index.html, 1.5, 1999/02/21 21:46:30;
+/cvsroot/bras/bras/evalCmds.tcl, 1.4, 1999/02/21 21:46:30;
+/cvsroot/bras/bras/exported.tcl, 1.2, 1999/02/21 21:46:30;
+/cvsroot/bras/bras/bras.1, 1.7, 1999/02/21 21:46:29;
+/cvsroot/bras/bras/Attic/dotest, 1.5, 1999/02/21 21:46:29;
+/cvsroot/bras/bras/bras.spec, 1.5, 1999/02/21 21:46:29;
+/cvsroot/bras/bras/consider.tcl, 1.11, 1999/02/21 21:46:29;
+/cvsroot/bras/bras/ANNOUNCE, 1.6, 1999/02/21 21:46:28;
+/cvsroot/bras/bras/bras, 1.26, 1999/02/21 21:46:28;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.18, 1999/02/21 21:46:27;
+-----------------------------------------------------------
+
+Initial entry.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.43, 1.1, 1999/02/21 21:13:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.42, 1.1, 1999/02/21 21:13:04;
+-----------------------------------------------------------
+
+More discussion with P.D. resulted again in lots of changes. This is an
+intermediate release mostly intended for him to test it.
+
+o Instead of visible variable BrasSearchPath there is now a commmand
+`searchpath' which sets a search path used locally for the current
+directory. This is necessary to make the search path behave in case of
+@-targets.
+
+o README.searchpath contains a short description of how it is supposed to
+work.
+
+o Test1/brasfile.{40,41} contain two very primitive test of searchpath.
+
+o searchpath applies to all dependencies which are relative path names.
+
+o option -d is even more verbose now and explain thoroughly were it finds
+dependencies.
+
+Looking at the output of -d I saw that prerequisites were considered to
+often unnecessarily. Therefore Defrule now allows to specify (new) rules
+with just two parameters which signals to bras that these rules never ever
+are interested in their dependencies (like Always and Exist). On the other
+hand bras expects from rules which do want to see the dependencies that they
+consider them all, i.e. bras does not by default copy them to the
+prerequisite-list.
+
+applies to:
+/cvsroot/bras/bras/Test2/Attic/brasfile.14, 1.2, 1999/02/11 19:46:22;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.4, 1999/02/11 19:46:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.34, 1.2, 1999/02/11 19:46:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.33, 1.2, 1999/02/11 19:46:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.28, 1.2, 1999/02/11 19:46:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.5, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.5, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.4, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.26, 1.4, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.25, 1.4, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.18, 1.2, 1999/02/11 19:46:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.5, 1999/02/11 19:46:10;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.5, 1999/02/11 19:46:10;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.8, 1999/02/11 19:46:08;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.6, 1999/02/11 19:46:07;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.6, 1999/02/11 19:46:07;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.6, 1999/02/11 19:46:07;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.4, 1999/02/11 19:46:07;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.3, 1999/02/11 19:46:07;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.6, 1999/02/11 19:46:06;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.5, 1999/02/11 19:46:06;
+/cvsroot/bras/bras/bras, 1.25, 1999/02/11 19:46:06;
+/cvsroot/bras/bras/Brasfile, 1.13, 1999/02/11 19:46:06;
+/cvsroot/bras/bras/consider.tcl, 1.10, 1999/02/11 19:46:06;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.17, 1999/02/11 19:46:05;
+-----------------------------------------------------------
+
+initial checkin
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.41, 1.1, 1999/02/11 19:36:09;
+/cvsroot/bras/bras/Test1/Attic/brasfile.40, 1.1, 1999/02/11 19:36:09;
+/cvsroot/bras/bras/exported.tcl, 1.1, 1999/02/11 19:36:06;
+/cvsroot/bras/bras/README.searchpath, 1.1, 1999/02/11 19:36:05;
+-----------------------------------------------------------
+
+Long email discussion with Paul Duffin resulted in the current code for
+BrasSearchPath, which is similar to make's VPATH.
+
+This seems to work, but I had no real world test yet.
+
+applies to:
+/cvsroot/bras/bras/consider.tcl, 1.9, 1999/02/02 06:41:59;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.5, 1999/02/02 06:41:59;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.5, 1999/02/02 06:41:59;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.16, 1999/02/02 06:41:58;
+-----------------------------------------------------------
+
+Going to send this to Paul Duffin for preliminary tests.
+
+applies to:
+/cvsroot/bras/bras/Attic/rules.Linux, 1.7, 1999/01/28 22:30:41;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.5, 1999/01/28 22:30:41;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.4, 1999/01/28 22:30:41;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.4, 1999/01/28 22:30:41;
+/cvsroot/bras/bras/consider.tcl, 1.8, 1999/01/28 22:30:40;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.5, 1999/01/28 22:30:40;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.2, 1999/01/28 22:30:40;
+/cvsroot/bras/bras/bras, 1.24, 1999/01/28 22:30:39;
+-----------------------------------------------------------
+
+ANNOUNCE added to the installation.
+No need to run latex in clig.spec because doc/bras.ps is included in
+the distribution already.
+
+applies to:
+/cvsroot/bras/bras/README, 1.5, 1999/01/24 07:37:47;
+/cvsroot/bras/bras/ANNOUNCE, 1.5, 1999/01/24 07:37:47;
+/cvsroot/bras/bras/bras.spec, 1.4, 1999/01/24 07:37:47;
+/cvsroot/bras/bras/Attic/install.wish, 1.15, 1999/01/24 07:37:47;
+-----------------------------------------------------------
+
+A major change with regard to the handling of environment variables. The
+previous idea of copying them into global variables while controlling with
+-e when this has to happen was inspired by make but does not work well with
+bras, in particular because globals may be set in Brasfiles which are
+only source on demand of an @-dependency.
+
+Instead of copying environment variables into globals, there is now a
+builtin command getenv which may be used like
+  getenv prefix /my/special/dir
+It sets prefix to the given value, except if the environement contains a
+value for prefix. In that case, prefix is set to the value from the
+environment. As before, the environment can be extended on the commandline
+with a syntax like var='new value'.
+
+I also fiddled with evalCmds.tcl. It was broken with respect to handling
+commands to be auto-loaded. The new version should handle auto-loaded
+functions correctly, however I did not yet test it. Also the output in case
+of errors was changed slightly.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.16, 1999/01/23 19:27:33;
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.7, 1999/01/23 19:27:25;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.6, 1999/01/23 19:27:25;
+/cvsroot/bras/bras/bras.1, 1.6, 1999/01/23 19:27:25;
+/cvsroot/bras/bras/evalCmds.tcl, 1.3, 1999/01/23 19:27:25;
+/cvsroot/bras/bras/bras, 1.23, 1999/01/23 19:27:24;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.15, 1999/01/23 19:27:24;
+/cvsroot/bras/bras/Brasfile, 1.12, 1999/01/23 19:27:24;
+-----------------------------------------------------------
+
+initial checkin.
+
+applies to:
+/cvsroot/bras/bras/bras.lsm, 1.1, 1998/08/12 11:46:58;
+-----------------------------------------------------------
+
+The rpm produced file with wrong owner and permission.
+
+Adapted ANNOUNCE because I want to publish soon.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.4, 1998/08/11 10:26:14;
+/cvsroot/bras/bras/bras.spec, 1.3, 1998/08/11 10:26:14;
+/cvsroot/bras/bras/Attic/install.wish, 1.14, 1998/08/11 10:26:14;
+/cvsroot/bras/bras/Brasfile, 1.11, 1998/08/11 10:26:14;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.14, 1998/08/11 10:26:13;
+-----------------------------------------------------------
+
+Changes were necessary to include the rpm into the WWW homepage.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.4, 1998/08/07 14:11:20;
+/cvsroot/bras/bras/Brasfile, 1.10, 1998/08/07 14:11:19;
+-----------------------------------------------------------
+
+Just finished with bras.spec which can be used to build a binary rpm. That
+required some changes in install.wish.
+
+bras.1 was still missing the description for var=value command line
+arguments.
+
+A little correction was necessary in doc/bras.tex about the exact effect of
+var=value on the command line.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.15, 1998/08/06 18:09:16;
+/cvsroot/bras/bras/bras.spec, 1.2, 1998/08/06 18:09:12;
+/cvsroot/bras/bras/Attic/install.wish, 1.13, 1998/08/06 18:09:12;
+/cvsroot/bras/bras/bras.1, 1.5, 1998/08/06 18:09:11;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.13, 1998/08/06 18:09:11;
+-----------------------------------------------------------
+
+initial checkin
+
+applies to:
+/cvsroot/bras/bras/bras.spec, 1.1, 1998/08/06 17:57:01;
+-----------------------------------------------------------
+
+Slightly changed install-behaviour.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.22, 1998/07/13 14:46:17;
+/cvsroot/bras/bras/Attic/install.wish, 1.12, 1998/07/13 14:46:17;
+-----------------------------------------------------------
+
+The environment is now mapped into global variables to let the initialize
+globals like CC, LD and the like. Similar to `make', this mapping can be
+postponed to happen only after brasfile was read, so that the environment
+has precedence over settings made in brasfile.
+
+Also, variable definitions of the form `var=value' may now be given on the
+command line.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.21, 1998/07/12 15:47:11;
+/cvsroot/bras/bras/doc/bras.tex, 1.14, 1998/07/12 15:47:07;
+-----------------------------------------------------------
+
+Enhanced behaviour of include-command. It now understands a parameter
+starting with `@'. In that case, the parameter must be a directory and its
+brasfile is read in immediately.
+
+Very useful in subdirectories to source the major brasfile so that one can
+work in the subdirectory alone.
+
+Delete brasLastInclude again. Its purpose should be covered by
+[info script].
+
+applies to:
+/cvsroot/bras/bras/bras, 1.20, 1998/07/12 14:34:13;
+/cvsroot/bras/bras/pkgIndex.tcl, 1.12, 1998/07/12 14:34:13;
+/cvsroot/bras/bras/doc/bras.tex, 1.13, 1998/07/12 14:34:06;
+-----------------------------------------------------------
+
+shipping bras-0.1.5
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.11, 1998/01/18 13:11:33;
+-----------------------------------------------------------
+
+Could not ship due to change of destination dir. Hopefully this is corrected
+now.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.9, 1998/01/18 13:11:26;
+-----------------------------------------------------------
+
+shipping bras-0.1.4
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.10, 1998/01/18 13:08:20;
+-----------------------------------------------------------
+
+Changed the destination-directory.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.8, 1998/01/18 13:07:59;
+-----------------------------------------------------------
+
+Going to publish this. (Better late than never.)
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.3, 1997/12/14 17:16:16;
+-----------------------------------------------------------
+
+ship bras-0.1.3
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.9, 1997/11/24 06:16:43;
+-----------------------------------------------------------
+
+Fixed typo in usage-message of bras.
+Added -e options to call of `ship' in Brasfile.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.19, 1997/11/24 06:16:28;
+/cvsroot/bras/bras/Brasfile, 1.7, 1997/11/24 06:16:27;
+-----------------------------------------------------------
+
+ship bras-0.1.2
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.8, 1997/11/24 05:59:20;
+-----------------------------------------------------------
+
+Added variable VERSION again. It will be edited to reflect the current
+version while the package is shipped.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.18, 1997/11/24 05:59:07;
+-----------------------------------------------------------
+
+ship bras-0.1.1
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.7, 1997/11/22 21:02:37;
+-----------------------------------------------------------
+
+The manual still missed options -N, -s, -ss.
+
+Installation still relied on the older version date instead of
+reading out .version.
+
+applies to:
+/cvsroot/bras/bras/bras.1, 1.4, 1997/11/22 21:02:08;
+/cvsroot/bras/bras/Attic/install.wish, 1.11, 1997/11/22 21:02:08;
+-----------------------------------------------------------
+
+ship bras-0.1.0
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.6, 1997/11/22 20:34:55;
+-----------------------------------------------------------
+
+Added link to our directory with all the .tar.gz files.
+
+applies to:
+/cvsroot/bras/bras/index.html, 1.3, 1997/11/22 20:34:31;
+-----------------------------------------------------------
+
+ship bras-0.0.5
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.5, 1997/11/22 20:23:06;
+-----------------------------------------------------------
+
+ship bras-0.0.4
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.4, 1997/11/22 20:17:29;
+-----------------------------------------------------------
+
+I am trying to get this file to operate together with my new
+shipment script. This script only runs, if cvs update does not say a thing
+which is why I currently need frequent commits.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.6, 1997/11/22 20:17:22;
+-----------------------------------------------------------
+
+ship bras-0.0.3
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.3, 1997/11/22 19:59:05;
+-----------------------------------------------------------
+
+Started to use ship instead of pack to get "real" version numbers
+instead of version dates.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.5, 1997/11/22 19:57:25;
+-----------------------------------------------------------
+
+ship bras-0.0.2
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.2, 1997/11/22 17:04:46;
+-----------------------------------------------------------
+
+ship bras-0.0.0
+
+applies to:
+/cvsroot/bras/bras/pkgIndex.tcl, 1.1, 1997/11/22 17:01:11;
+-----------------------------------------------------------
+
+Removed bras.ps from the CVS-repository.
+
+applies to:
+/cvsroot/bras/bras/doc/.cvsignore, 1.2, 1997/11/22 16:59:15;
+-----------------------------------------------------------
+
+Several major changes.
+
+o In a prerelease, the DependsFile-rule was called CDepends.
+
+o The whole method of using pattern-rules was revised and changed. Basically
+  the order in which they were checked was changed. Also MatchDep* was
+  introduced to help finding default commands. The result of MatchDep* is
+  made available to the command to be executed in global variable
+  patternTrigger. Finding default rules now works recursively.
+
+o Option -n does *really* nothing now.
+
+o The old behaviour of -n was moved to -N.
+
+o Options -s and -ss allow silent and super-silent operation.
+
+o The `include'-command now sets global variable brasLastInclude to the
+  file it is going to source.
+
+The doc was updated accordingly.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.12, 1997/11/19 07:02:15;
+-----------------------------------------------------------
+
+Several major changes.
+
+o In a prerelease, the DependsFile-rule was called CDepends.
+
+o The whole method of using pattern-rules was revised and changed. Basically
+  the order in which they were checked was changed. Also MatchDep* was
+  introduced to help finding default commands. The result of MatchDep* is
+  made available to the command to be executed in global variable
+  patternTrigger. Finding default rules now works recursively.
+
+o Option -n does *really* nothing now.
+
+o The old behaviour of -n was moved to -N.
+
+o Options -s and -ss allow silent and super-silent operation.
+
+o The `include'-command now sets global variable brasLastInclude to the
+  file it is going to source.
+
+All this required the change of several tests.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.39, 1.2, 1997/11/19 07:01:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.3, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.3, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.26, 1.3, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.38, 1.2, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.37, 1.2, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.36, 1.2, 1997/11/19 07:01:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.4, 1997/11/19 07:01:44;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.4, 1997/11/19 07:01:44;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.4, 1997/11/19 07:01:44;
+/cvsroot/bras/bras/Test1/Attic/brasfile.25, 1.3, 1997/11/19 07:01:44;
+-----------------------------------------------------------
+
+Several major changes.
+
+o In a prerelease, the DependsFile-rule was called CDepends.
+
+o The whole method of using pattern-rules was revised and changed. Basically
+  the order in which they were checked was changed. Also MatchDep* was
+  introduced to help finding default commands. The result of MatchDep* is
+  made available to the command to be executed in global variable
+  patternTrigger. Finding default rules now works recursively.
+
+o Option -n does *really* nothing now.
+
+o The old behaviour of -n was moved to -N.
+
+o Options -s and -ss allow silent and super-silent operation.
+
+o The `include'-command now sets global variable brasLastInclude to the
+  file it is going to source.
+
+applies to:
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.4, 1997/11/19 07:01:26;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.3, 1997/11/19 07:01:26;
+/cvsroot/bras/bras/evalCmds.tcl, 1.2, 1997/11/19 07:01:26;
+/cvsroot/bras/bras/Attic/dependsFileRule.tcl, 1.1, 1997/11/19 07:01:26;
+/cvsroot/bras/bras/consider.tcl, 1.7, 1997/11/19 07:01:25;
+/cvsroot/bras/bras/TODO, 1.5, 1997/11/19 07:01:25;
+/cvsroot/bras/bras/Attic/cDependRule.tcl, 1.2, 1997/11/19 07:01:25;
+/cvsroot/bras/bras/bras, 1.17, 1997/11/19 07:01:25;
+-----------------------------------------------------------
+
+o defaultCmd considers pattern rules now in the opposite order in which
+  they were entered.
+o the same holds for lastMinuteRule. It also no longer insists to find a
+  file for intermediate dependencies.
+o The different order required changes in the rules.* files. (I am afraid
+  they are still next to useless.)
+o sourceDeps was broken down into two functions, one of which reads from
+  an open descriptor (which could be a pipe like cpp -M).
+o cDependRule.tcl implements a new type of rule. It is intended to help
+  handling the dependency problems between .c- and .o-files.
+
+Only a short remark about all that made it into the docs.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.11, 1997/11/09 19:44:17;
+-----------------------------------------------------------
+
+o defaultCmd considers pattern rules now in the opposite order in which
+  they were entered.
+o the same holds for lastMinuteRule. It also no longer insists to find a
+  file for intermediate dependencies.
+o The different order required changes in the rules.* files. (I am afraid
+  they are still next to useless.)
+o sourceDeps was broken down into two functions, one of which reads from
+  an open descriptor (which could be a pipe like cpp -M).
+o cDependRule.tcl implements a new type of rule. It is intended to help
+  handling the dependency problems between .c- and .o-files.
+
+All this required new and changed tests.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.39, 1.1, 1997/11/09 19:43:43;
+/cvsroot/bras/bras/Test1/Attic/brasfile.38, 1.1, 1997/11/09 19:43:43;
+/cvsroot/bras/bras/Test1/Attic/brasfile.37, 1.1, 1997/11/09 19:43:43;
+/cvsroot/bras/bras/Test1/Attic/brasfile.36, 1.1, 1997/11/09 19:43:43;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.3, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.3, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.2, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.2, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.26, 1.2, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.25, 1.2, 1997/11/09 19:43:42;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.4, 1997/11/09 19:43:41;
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.3, 1997/11/09 19:43:41;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.3, 1997/11/09 19:43:41;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.3, 1997/11/09 19:43:41;
+-----------------------------------------------------------
+
+o defaultCmd considers pattern rules now in the opposite order in which
+  they were entered.
+o the same holds for lastMinuteRule. It also no longer insists to find a
+  file for intermediate dependencies.
+o The different order required changes in the rules.* files. (I am afraid
+  they are still next to useless.)
+o sourceDeps was broken down into two functions, one of which reads from
+  an open descriptor (which could be a pipe like cpp -M).
+o cDependRule.tcl implements a new type of rule. It is intended to help
+  handling the dependency problems between .c- and .o-files.
+
+applies to:
+/cvsroot/bras/bras/sourceDeps.tcl, 1.6, 1997/11/09 19:43:18;
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.6, 1997/11/09 19:43:18;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.5, 1997/11/09 19:43:18;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.2, 1997/11/09 19:43:18;
+/cvsroot/bras/bras/TODO, 1.4, 1997/11/09 19:43:17;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.3, 1997/11/09 19:43:17;
+/cvsroot/bras/bras/bras, 1.16, 1997/11/09 19:43:17;
+/cvsroot/bras/bras/Attic/cDependRule.tcl, 1.1, 1997/11/09 19:43:17;
+/cvsroot/bras/bras/Brasfile, 1.4, 1997/11/09 19:43:16;
+-----------------------------------------------------------
+
+Major change. There can only be at most one rule for every target. This
+allowed to introduce the following commands:
+
+  ClearDeps <target>
+  ClearCmds <target>
+  ClearPreqs <target>
+
+  GetDeps <target>
+  GetCmds <target>
+  GetPreqs <target>
+
+With these, incremental fine-tuning of the rule base is possible. Invocation
+of a normal rule always extends the lists already available for a target
+(if any).
+
+This of course required to change/remove/add some tests.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.32, 1.2, 1997/11/08 21:59:51;
+/cvsroot/bras/bras/Test1/Attic/brasfile.31, 1.2, 1997/11/08 21:59:51;
+/cvsroot/bras/bras/Test1/Attic/brasfile.35, 1.1, 1997/11/08 21:59:51;
+/cvsroot/bras/bras/Test1/Attic/brasfile.34, 1.1, 1997/11/08 21:59:51;
+/cvsroot/bras/bras/Test1/Attic/brasfile.33, 1.1, 1997/11/08 21:59:51;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.4, 1997/11/08 21:59:50;
+/cvsroot/bras/bras/Test1/Attic/brasfile.19, 1.3, 1997/11/08 21:59:50;
+/cvsroot/bras/bras/Test1/Attic/brasfile.30, 1.2, 1997/11/08 21:59:50;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.2, 1997/11/08 21:59:50;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.2, 1997/11/08 21:59:50;
+-----------------------------------------------------------
+
+Major change. There can only be at most one rule for every target. This
+allowed to introduce the following commands:
+
+  ClearDeps <target>
+  ClearCmds <target>
+  ClearPreqs <target>
+
+  GetDeps <target>
+  GetCmds <target>
+  GetPreqs <target>
+
+With these, incremental fine-tuning of the rule base is possible. Invocation
+of a normal rule always extends the lists already available for a target
+(if any).
+
+applies to:
+/cvsroot/bras/bras/consider.tcl, 1.6, 1997/11/08 21:59:19;
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.5, 1997/11/08 21:59:19;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.4, 1997/11/08 21:59:19;
+/cvsroot/bras/bras/bras, 1.15, 1997/11/08 21:59:19;
+/cvsroot/bras/bras/Attic/brasUtils.tcl, 1.1, 1997/11/08 21:59:19;
+-----------------------------------------------------------
+
+A pattern rule called `SuffixNewer' was still mentioned twice. Changed to
+`PatternNewer'.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.10, 1997/11/08 21:56:29;
+-----------------------------------------------------------
+
+In defaultCmd.tcl the order in which pattern rules were searched for
+a default command was changed so that rules entered last are considered
+first. That is documented now.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.9, 1997/11/08 18:55:28;
+-----------------------------------------------------------
+
+In defaultCmd.tcl the order in which pattern rules were searched for
+a default command was changed so that rules entered last are considered
+first.
+
+In files rules.* the rule .c->.o had a bug. It used some derivation
+of target instead of $trigger.
+
+In index.html a few warnings from weblint were corrected.
+
+
+After a discussion with some nice guys on the net I will start now some
+major changes.
+
+applies to:
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.4, 1997/11/08 18:55:00;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.3, 1997/11/08 18:55:00;
+/cvsroot/bras/bras/index.html, 1.2, 1997/11/08 18:55:00;
+/cvsroot/bras/bras/TODO, 1.3, 1997/11/08 18:54:59;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.2, 1997/11/08 18:54:59;
+-----------------------------------------------------------
+
+The Brasfile which constructs my homepage is copied now into
+the doc-subdirectory to serve as an example.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.10, 1997/11/06 05:35:59;
+-----------------------------------------------------------
+
+The main script had a type in the usage message.
+The option -es was not yet in the manual page.
+The install-script entered wrong links into the manual page.
+
+The Brasfile construct the bras homepage for the WWW.
+The text for the homepage is in index.html.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.9, 1997/11/05 21:36:47;
+/cvsroot/bras/bras/index.html, 1.1, 1997/11/05 21:36:47;
+/cvsroot/bras/bras/Brasfile, 1.3, 1997/11/05 21:36:46;
+/cvsroot/bras/bras/bras.1, 1.3, 1997/11/05 21:36:46;
+/cvsroot/bras/bras/bras, 1.14, 1997/11/05 21:36:46;
+/cvsroot/bras/bras/.cvsignore, 1.1, 1997/11/05 21:36:46;
+-----------------------------------------------------------
+
+Although trivial, the Brasfile is needed by the Brasfile which
+constructs the www-page for bras.
+
+The changes in bras.ps are irrelevant.
+
+applies to:
+/cvsroot/bras/bras/doc/Brasfile, 1.1, 1997/11/05 21:33:20;
+-----------------------------------------------------------
+
+Made a useful README. The previous one did not contain enough info.
+
+applies to:
+/cvsroot/bras/bras/README, 1.4, 1997/07/26 09:53:56;
+/cvsroot/bras/bras/ANNOUNCE, 1.2, 1997/07/26 09:53:55;
+-----------------------------------------------------------
+
+Fixed some typos.
+Changed description about when @-Brasfiles are sourced.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.8, 1997/07/26 09:52:26;
+/cvsroot/bras/bras/doc/Attic/brasHome.html, 1.2, 1997/07/26 09:52:26;
+-----------------------------------------------------------
+
+Until now, sourcing of brasfiles in directories were @-dependencies lead to
+happened as soon as such a dependency was seen in a rule.
+
+Now this is delayed until the dependency is really considered as a target,
+resulting in considerable speedup, in particular, if bras is called in a
+subdirectory, where the sibling directories are of no interest.
+
+To be able to compare with the old behaviour, option -es for `early sourcing'
+was introduced.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.23, 1.3, 1997/07/19 17:39:54;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.5, 1997/07/19 17:39:44;
+/cvsroot/bras/bras/consider.tcl, 1.5, 1997/07/19 17:39:44;
+/cvsroot/bras/bras/bras, 1.13, 1997/07/19 17:39:44;
+-----------------------------------------------------------
+
+Added path to warning about missing dependency file.
+
+applies to:
+/cvsroot/bras/bras/sourceDeps.tcl, 1.4, 1997/07/11 19:34:44;
+-----------------------------------------------------------
+
+Tests were changed to run with tclsh8.0
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.3, 1997/06/06 17:19:30;
+/cvsroot/bras/bras/Test1/Attic/brasfile.23, 1.2, 1997/06/06 17:19:30;
+-----------------------------------------------------------
+
+The main file `bras' got a private version of cd, which does nothing if
+the parameter is `.'.
+
+Dotest was changed to run with tclsh8.0
+
+applies to:
+/cvsroot/bras/bras/Attic/dotest, 1.4, 1997/06/06 17:19:12;
+/cvsroot/bras/bras/bras, 1.12, 1997/06/06 17:19:11;
+-----------------------------------------------------------
+
+Content of the mail to be send to newsgroups to announce a new version.
+
+applies to:
+/cvsroot/bras/bras/ANNOUNCE, 1.1, 1997/05/04 17:46:43;
+-----------------------------------------------------------
+
+Added comments and output to inform a user that (s)he is not supposed to
+run the test, which currently only run on my machine in the correct
+directory.
+
+applies to:
+/cvsroot/bras/bras/Attic/dotest, 1.3, 1997/05/04 17:22:57;
+/cvsroot/bras/bras/INSTALL, 1.3, 1997/05/04 17:22:56;
+-----------------------------------------------------------
+
+An error occured if the convenience linking found a dangling link; corrected.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.8, 1997/05/01 16:18:07;
+-----------------------------------------------------------
+
+The file became obsolete. Tests are conducted another way.
+
+applies to:
+/cvsroot/bras/bras/Brasfile, 1.2, 1997/05/01 15:38:21;
+-----------------------------------------------------------
+
+File CHANGES is no longer maintained now. Consequently, install.wish had
+to be changed a bit.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.7, 1997/05/01 15:05:25;
+/cvsroot/bras/bras/Attic/CHANGES, 1.2, 1997/05/01 15:05:25;
+-----------------------------------------------------------
+
+o Every rule may have more than one target.
+o A target may show up in more than one rule.
+o Prerequisites can be made explicit
+
+o Doc is fairly up-to-date and covers the topics above.
+o Small html-homepage added for bras.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.7, 1997/05/01 14:54:27;
+/cvsroot/bras/bras/doc/Attic/brasHome.html, 1.1, 1997/05/01 14:54:27;
+-----------------------------------------------------------
+
+o Every rule may have more than one target.
+o A target may show up in more than one rule.
+o Prerequisites can be made explicit
+
+o Added tests to check the interaction of the above.
+o Some tests became obsolete.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.32, 1.1, 1997/05/01 14:53:37;
+/cvsroot/bras/bras/Test1/Attic/brasfile.24, 1.2, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.22, 1.2, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.31, 1.1, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.30, 1.1, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.29, 1.1, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.28, 1.1, 1997/05/01 14:53:36;
+/cvsroot/bras/bras/Test1/Attic/brasfile.02, 1.4, 1997/05/01 14:53:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.01, 1.4, 1997/05/01 14:53:35;
+/cvsroot/bras/bras/Test1/Attic/brasfile.19, 1.2, 1997/05/01 14:53:35;
+-----------------------------------------------------------
+
+o Every rule may have more than one target.
+o A target may show up in more than one rule.
+o Prerequisites can be made explicit
+
+applies to:
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.4, 1997/05/01 14:52:43;
+/cvsroot/bras/bras/Attic/runtest, 1.3, 1997/05/01 14:52:43;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.3, 1997/05/01 14:52:43;
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.6, 1997/05/01 14:52:42;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.4, 1997/05/01 14:52:42;
+/cvsroot/bras/bras/consider.tcl, 1.4, 1997/05/01 14:52:42;
+/cvsroot/bras/bras/Attic/commandRule.tcl, 1.2, 1997/05/01 14:52:42;
+/cvsroot/bras/bras/bras, 1.11, 1997/05/01 14:52:42;
+/cvsroot/bras/bras/README, 1.3, 1997/05/01 14:52:41;
+/cvsroot/bras/bras/TODO, 1.2, 1997/05/01 14:52:41;
+-----------------------------------------------------------
+
+This is the version which knows about
+o multiple rules for a target
+o multiple targets in a rule
+but does not allow more than one command for a target. It runs fine through
+all its tests and compiles the two projects managed with bras that I have
+easily.
+
+While writing the doc, I found out that it is rather illogical to not
+allow more than one command for a target. This is what I am going to implement
+now.
+
+Consequently, the doc is in a transient state, i.e. it neither fully
+describes this version, nor the coming one.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.6, 1997/04/30 17:36:29;
+-----------------------------------------------------------
+
+This is the version which knows about
+o multiple rules for a target
+o multiple targets in a rule
+but does not allow more than one command for a target. It runs fine through
+all its tests and compiles the two projects managed with bras that I have
+easily.
+
+While writing the doc, I found out that it is rather illogical to not
+allow more than one command for a target. This is what I am going to implement
+now.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.27, 1.1, 1997/04/30 17:35:47;
+/cvsroot/bras/bras/Test1/Attic/brasfile.26, 1.1, 1997/04/30 17:35:47;
+/cvsroot/bras/bras/Test1/Attic/brasfile.25, 1.1, 1997/04/30 17:35:47;
+/cvsroot/bras/bras/Test1/Attic/brasfile.24, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.23, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.22, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.21, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.20, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.19, 1.1, 1997/04/30 17:35:46;
+/cvsroot/bras/bras/Test1/Attic/brasfile.03, 1.3, 1997/04/30 17:35:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.02, 1.3, 1997/04/30 17:35:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.01, 1.3, 1997/04/30 17:35:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.17, 1.2, 1997/04/30 17:35:45;
+/cvsroot/bras/bras/Test1/Attic/brasfile.18, 1.1, 1997/04/30 17:35:45;
+/cvsroot/bras/bras/sourceDeps.tcl, 1.3, 1997/04/30 17:35:29;
+/cvsroot/bras/bras/Attic/install.wish, 1.6, 1997/04/30 17:35:28;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.3, 1997/04/30 17:35:28;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.3, 1997/04/30 17:35:28;
+/cvsroot/bras/bras/consider.tcl, 1.3, 1997/04/30 17:35:28;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.2, 1997/04/30 17:35:28;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.3, 1997/04/30 17:35:27;
+/cvsroot/bras/bras/bras, 1.10, 1997/04/30 17:35:27;
+/cvsroot/bras/bras/TODO, 1.1, 1997/04/30 17:35:27;
+/cvsroot/bras/bras/Attic/commandRule.tcl, 1.1, 1997/04/30 17:35:27;
+-----------------------------------------------------------
+
+Implemented the feature to let several targets be built with the same
+command. This is more tricky than I thought, in particular if you want to
+let the targets share some dependencies and some not. Currently, if the
+first target of a rule is made, the private dependencies of the other
+targets of that rule are never considered.
+
+Because I think this is wrong, I embark to redesign the thing again.
+
+Had to change some tests and added some new ones.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.2, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.2, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.13, 1.2, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.2, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.17, 1.1, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.16, 1.1, 1997/04/26 19:58:05;
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.3, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.3, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.3, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/brasfile.06, 1.3, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/brasfile.08, 1.2, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/brasfile.07, 1.2, 1997/04/26 19:58:04;
+/cvsroot/bras/bras/Test1/Attic/Brasfile, 1.3, 1997/04/26 19:58:03;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.2, 1997/04/26 19:58:03;
+/cvsroot/bras/bras/Test1/Attic/brasfile.04, 1.2, 1997/04/26 19:58:03;
+/cvsroot/bras/bras/Test1/Attic/brasfile.03, 1.2, 1997/04/26 19:58:03;
+/cvsroot/bras/bras/Test1/Attic/brasfile.02, 1.2, 1997/04/26 19:58:03;
+/cvsroot/bras/bras/Test1/Attic/brasfile.01, 1.2, 1997/04/26 19:58:03;
+-----------------------------------------------------------
+
+Implemented the feature to let several targets be built with the same
+command. This is more tricky than I thought, in particular if you want to
+let the targets share some dependencies and some not. Currently, if the
+first target of a rule is made, the private dependencies of the other
+targets of that rule are never considered.
+
+Because I think this is wrong, I embark to redesign the thing again.
+
+applies to:
+/cvsroot/bras/bras/sourceDeps.tcl, 1.2, 1997/04/26 19:57:32;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.2, 1997/04/26 19:57:32;
+/cvsroot/bras/bras/Attic/install.wish, 1.5, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.2, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/Attic/dotest, 1.2, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/consider.tcl, 1.2, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/lastMinuteRule.tcl, 1.1, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/Attic/defaultCmd.tcl, 1.1, 1997/04/26 19:57:31;
+/cvsroot/bras/bras/bras, 1.9, 1997/04/26 19:57:30;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.2, 1997/04/26 19:57:30;
+/cvsroot/bras/bras/bras.1, 1.2, 1997/04/26 19:57:30;
+-----------------------------------------------------------
+
+A whole new way of reasoning is implemented, replacing the older,
+non-extensible buildCmds with consider, defrule, alwaysRule, existRule and
+newerRule. It should be pretty easy now to introduce new types of rules,
+because every rule now has its own dedicated reasoning procedure. These
+reasoning procedures are directed by consider.
+
+The doc got a little hint about it, but does not yet describe the new feature
+in detail.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.5, 1997/04/20 07:07:17;
+-----------------------------------------------------------
+
+A whole new way of reasoning is implemented, replacing the older,
+non-extensible buildCmds with consider, defrule, alwaysRule, existRule and
+newerRule. It should be pretty easy now to introduce new types of rules,
+because every rule now has its own dedicated reasoning procedure. These
+reasoning procedures are directed by consider.
+
+This made it necessary to change some tests. Some new tests were added.
+
+applies to:
+/cvsroot/bras/bras/Test2/Attic/brasfile.15, 1.1, 1997/04/20 07:06:27;
+/cvsroot/bras/bras/Test2/Attic/brasfile.14, 1.1, 1997/04/20 07:06:26;
+/cvsroot/bras/bras/Test2/Attic/brasfile.13, 1.1, 1997/04/20 07:06:26;
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.2, 1997/04/20 07:06:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.15, 1.1, 1997/04/20 07:06:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.14, 1.1, 1997/04/20 07:06:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.13, 1.1, 1997/04/20 07:06:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.12, 1.1, 1997/04/20 07:06:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.2, 1997/04/20 07:06:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.2, 1997/04/20 07:06:11;
+/cvsroot/bras/bras/Test1/Attic/brasfile.06, 1.2, 1997/04/20 07:06:11;
+-----------------------------------------------------------
+
+A whole new way of reasoning is implemented, replacing the older,
+non-extensible buildCmds with consider, defrule, alwaysRule, existRule and
+newerRule. It should be pretty easy now to introduce new types of rules,
+because every rule now has its own dedicated reasoning procedure. These
+reasoning procedures are directed by consider.
+
+applies to:
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.5, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/Attic/install.wish, 1.4, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/Attic/newerRule.tcl, 1.1, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/Attic/existRule.tcl, 1.1, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/Attic/defrule.tcl, 1.1, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/consider.tcl, 1.1, 1997/04/20 07:05:13;
+/cvsroot/bras/bras/bras, 1.8, 1997/04/20 07:05:12;
+/cvsroot/bras/bras/Attic/alwaysRule.tcl, 1.1, 1997/04/20 07:05:12;
+-----------------------------------------------------------
+
+Removed bug where `cd $keepPWD' was placed wrongly for the case where
+a file did not need any work.
+
+applies to:
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.4, 1997/04/09 20:04:02;
+-----------------------------------------------------------
+
+Described the effect of more than one rule for a target.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.4, 1997/03/28 11:12:47;
+-----------------------------------------------------------
+
+The new concept for testing has a single small brasfile for every test.
+This is one of them.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/brasfile.11, 1.1, 1997/03/28 11:12:13;
+/cvsroot/bras/bras/Test1/Attic/brasfile.10, 1.1, 1997/03/28 11:12:13;
+/cvsroot/bras/bras/Test1/Attic/brasfile.09, 1.1, 1997/03/28 11:12:13;
+/cvsroot/bras/bras/Test1/Attic/brasfile.08, 1.1, 1997/03/28 11:12:13;
+/cvsroot/bras/bras/Test1/Attic/brasfile.07, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.06, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.05, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.04, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.03, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.02, 1.1, 1997/03/28 11:12:12;
+/cvsroot/bras/bras/Test1/Attic/brasfile.01, 1.1, 1997/03/28 11:12:12;
+-----------------------------------------------------------
+
+The handling of multiple rules for one target was wrong. Corrected.
+runtest was extended to delete the files it creates.
+dotest is a new way of running tests which is more general and more easy
+to extend than runtest.
+
+applies to:
+/cvsroot/bras/bras/Attic/runtest, 1.2, 1997/03/28 11:11:30;
+/cvsroot/bras/bras/bras, 1.7, 1997/03/28 11:11:29;
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.3, 1997/03/28 11:11:29;
+/cvsroot/bras/bras/Attic/dotest, 1.1, 1997/03/28 11:11:29;
+-----------------------------------------------------------
+
+packing 0.1.1, 1997-03-19
+
+applies to:
+/cvsroot/bras/bras/bras, 1.6, 1997/03/19 20:50:15;
+-----------------------------------------------------------
+
+Suffix-rules are now called pattern-rules.
+
+applies to:
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.3, 1997/03/19 20:44:46;
+-----------------------------------------------------------
+
+Fixed some typos found by ispell.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.3, 1997/03/19 06:49:07;
+-----------------------------------------------------------
+
+packing 0.1.0, 1997-03-17
+
+applies to:
+/cvsroot/bras/bras/bras, 1.5, 1997/03/17 06:47:03;
+-----------------------------------------------------------
+
+Totally new and fairly complete doc.
+
+applies to:
+/cvsroot/bras/bras/doc/bras.tex, 1.2, 1997/03/16 18:29:33;
+-----------------------------------------------------------
+
+Due to several changes concerning suffix rules (now called pattern rules)
+the tests had to be changed a bit.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/run2.out, 1.2, 1997/03/16 18:29:11;
+/cvsroot/bras/bras/Test1/Attic/run1.out, 1.2, 1997/03/16 18:29:11;
+/cvsroot/bras/bras/Test1/Attic/Brasfile, 1.2, 1997/03/16 18:29:11;
+-----------------------------------------------------------
+
+The documentation is fairly complete now.
+Documentation of suffix rules revealed major problems of the approach. It
+was totally reconsidered and resulted in so called pattern rules which are
+more general as suffix rules and seem to work quite nicely.
+
+Dependency loop detection was added.
+
+A manual page was written.
+
+The README is totally new and does no longer contain about the same albeit
+wrong information as the documentation.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.3, 1997/03/16 18:28:05;
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.2, 1997/03/16 18:28:05;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.2, 1997/03/16 18:28:05;
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.2, 1997/03/16 18:28:05;
+/cvsroot/bras/bras/bras.1, 1.1, 1997/03/16 18:28:05;
+/cvsroot/bras/bras/bras, 1.4, 1997/03/16 18:28:04;
+/cvsroot/bras/bras/README, 1.2, 1997/03/16 18:28:04;
+/cvsroot/bras/bras/INSTALL, 1.2, 1997/03/16 18:28:04;
+-----------------------------------------------------------
+
+The new packing scheme required a change regarding version-extraction
+from bras.
+
+applies to:
+/cvsroot/bras/bras/Attic/install.wish, 1.2, 1997/03/15 17:57:13;
+-----------------------------------------------------------
+
+packing 0.0.3, 1997-03-15
+
+applies to:
+/cvsroot/bras/bras/bras, 1.3, 1997/03/15 17:15:51;
+-----------------------------------------------------------
+
+The new packing-mechanism required the introduction of variables VERSION
+and VERDATE into bras.
+
+applies to:
+/cvsroot/bras/bras/bras, 1.2, 1997/03/15 17:15:42;
+-----------------------------------------------------------
+
+Initialization
+
+applies to:
+/cvsroot/bras/bras/sourceDeps.tcl, 1.1, 1997/03/15 17:08:17;
+/cvsroot/bras/bras/Attic/runtest, 1.1, 1997/03/15 17:08:17;
+/cvsroot/bras/bras/README, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/Attic/rules.SunOS, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/Attic/rules.Linux, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/Attic/install.wish, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/evalCmds.tcl, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/Attic/buildCmds.tcl, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/bras, 1.1, 1997/03/15 17:08:16;
+/cvsroot/bras/bras/INSTALL, 1.1, 1997/03/15 17:08:15;
+/cvsroot/bras/bras/COPYING-2.0, 1.1, 1997/03/15 17:08:15;
+/cvsroot/bras/bras/Attic/CHANGES, 1.1, 1997/03/15 17:08:15;
+/cvsroot/bras/bras/Brasfile, 1.1, 1997/03/15 17:08:15;
+/cvsroot/bras/bras/Test2/Attic/Brasfile, 1.1, 1997/03/15 17:07:00;
+-----------------------------------------------------------
+
+Initialization.
+
+applies to:
+/cvsroot/bras/bras/Test1/Attic/run2.out, 1.1, 1997/03/15 17:06:37;
+/cvsroot/bras/bras/Test1/Attic/run1.out, 1.1, 1997/03/15 17:06:37;
+/cvsroot/bras/bras/Test1/Attic/Brasfile, 1.1, 1997/03/15 17:06:36;
+/cvsroot/bras/bras/doc/bras.tex, 1.1, 1997/03/15 17:05:04;
+/cvsroot/bras/bras/doc/.cvsignore, 1.1, 1997/03/15 17:05:03;

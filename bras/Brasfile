@@ -1,0 +1,105 @@
+########################################################################
+#
+# This is a real-world example of a brasfile. I use it to collect the
+# parts to go into the subdirectory published on the WWW.
+#
+# If you consider only those brasfiles typical which compile some
+# code, this one is not typical. Nevertheless some of the features of
+# bras are highlighted.
+#
+# At first this may look like any other Tcl-script. However in the
+# second half of this script, there are commands like `Make' or
+# `Always' which define rules to be followed by bras.
+#
+# $Revision: 1.34 $, $Date: 2002/02/26 20:06:48 $
+#
+########################################################################
+if {$::bras::base!="."} {
+  puts stderr "run ./bras to make sure the correct version is packed"
+  exit 1
+}
+## The destination for publishing
+getenv PUBDIR [file join wsd.iitb.fhg.de:.public_html brashome]
+
+## Where will the .tar.gz go
+getenv TGZDIR . ;#[file join [glob ~] rpm SOURCES]
+set TGZ [file join $TGZDIR bras-$::bras::VERSION.tar.gz]
+
+## Similarly for the binary rpm
+getenv RPMDIR [file join [glob ~] rpm RPMS noarch ]
+set RPM [file join $RPMDIR bras-$::bras::VERSION-0.noarch.rpm]
+
+########################################################################
+# 
+# So much for now. Here come the rules.
+#                                        (Hier kommt die Maus.)
+########################################################################
+
+## Target tgz is nothing but a shortcut to make $TGZ
+Make tgz {[updated $TGZ]} .relax.
+
+## Target $TGZ is made if it is older than any file known to cvs or
+## one of the other files mentioned below.
+set extraFiles [list @doc/bras.ps @doc/bras.pdf \
+		    pkgIndex.tcl bras.1.html]
+Make $TGZ {[older $target [concat [::bras::cvsknown] $extraFiles]]} {
+  ## pkgIndex.tcl is also mentioned with -e to have the VERDATE edited
+  ## in
+  set oneyear [clock format \
+		   [expr {[clock seconds]-31536000}] \
+		   -format %Y-%m-%d]
+  ship -F -d $TGZDIR \
+      -s $oneyear \
+      -I doc/bras.ps doc/bras.pdf pkgIndex.tcl bras.1.html \
+      -ver pkgIndex.tcl \
+      -e bras.spec pkgIndex.tcl
+}
+
+## Target rpm is a shortcut to make $RPM
+Make rpm {[true $RPM]} {
+  puts "made $deps"
+}
+
+## Target $RPM is made if it is older than $TGZ. A Newer-rule is
+## equivalent to `Make ... {[older $target ...]} 
+Newer $RPM $TGZ {
+  cd [glob ~/tmp]
+  rpm -tb --quiet --target noarch $TGZ
+}
+
+Newer bras.1.html bras.1 {
+  man -Thtml ./bras.1 >$target
+}
+
+## index.html needs some adjustments before going out
+Newer index.html.out {index.html pkgIndex.tcl} {
+  sed -e "s/|VERSION|/$::bras::VERSION/g" <index.html >$target
+}
+Newer CHANGES $TGZ {
+  tar xzfO $TGZ bras-$::bras::VERSION/CHANGES >CHANGES  
+}
+
+## Rules for publishing
+Make publish {[updated {publish-www publish-tgz}]} .relax.
+
+Make publish-www {[updated [list publish-CHANGES publish-index \
+				publish-doc]]} .relax.
+
+Always publish-CHANGES CHANGES {
+ scp CHANGES \
+     pifpafpuf@shell.berlios.de:/home/groups/bras/htdocs/
+}
+Always publish-doc {@doc/bras.pdf @doc/bras.ps bras.1.html} {
+ scp $deps \
+     pifpafpuf@shell.berlios.de:/home/groups/bras/htdocs/
+}
+Always publish-index index.html.out {
+ scp index.html.out \
+     pifpafpuf@shell.berlios.de:/home/groups/bras/htdocs/index.html
+}
+
+## Here we need an Always because there is now way to check if the
+## target out there is up-to-date.
+Always publish-tgz $TGZ {
+  ncftpput ftp.berlios.de /incoming $TGZ
+}

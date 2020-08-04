@@ -1,0 +1,30 @@
+Begin3
+Title:		bras - Rule Based Command Execution with Tcl
+Version:	0.3.1
+Entered-date:	$Date: 1998/08/12 11:46:58 $
+
+Description:    Bras is intended to do roughly the same job as the
+		(in)famous `make'-utitlity. It executes commands
+		according to a set of rules. Although I am quite happy
+		with `make' most of the time, it has some rough edges
+		which I really dislike. Therefore I decided the other
+		day that I want to have my own little tool without the
+		rough edges. The result is bras.
+
+		Main features are:
+		o rule-controlled command execution, similar to make;
+		o written in Tcl, no compilation required;
+		o Tcl-syntax so that commands associated with rules
+		may contain control structures;   
+
+Keywords:	Tcl, script, make,
+Author: 	kir@iitb.fhg.de (Harald Kirsch)
+Maintained-by:	kir@iitb.fhg.de (Harald Kirsch)
+Primary-site:	http://wsd.iitb.fhg.de/~kir/brashome/
+		   (115kB) bras-*.tar.gz
+Alternate-site: -
+Original-site:	-
+Platforms:	Tested on Linux. Should run on any platform supporting
+		Tcl without major modifications.
+Copying-policy:	GPL
+End

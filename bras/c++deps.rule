@@ -1,0 +1,59 @@
+########################################################################
+#
+# This file is part of bras, a program similar to the (in)famous
+# `make'-utitlity, written in Tcl.
+#
+# Copyright (C) 2002 Harald Kirsch
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+########################################################################
+#
+#
+# Automatically updated and cached dependencies for a C++ source file. 
+# Set the following variables in your brasfile:
+#  CXX -- name of C++ compiler
+#  CXXDEPOPTS -- option(s) which let your compiler emit make-dependencies
+#    for a given source file.
+#  CXXDEPEXCLUDE -- regular expression which specifies which
+#    dependencies need not be taken into account. A good start for
+#    this is {^/usr/}.
+#
+########################################################################
+PatternMake {.*[.]dc} .C {[oldcache $target $d]} {
+  ::bras::updateCacheC \
+      $target [lindex $deps 0] CXX CXXDEPOPTS CXXDEPEXCLUDE
+}
+PatternMake {.*[.]dc} .cc {[oldcache $target $d]} {
+  ::bras::updateCacheC \
+      $target [lindex $deps 0] CXX CXXDEPOPTS CXXDEPEXCLUDE
+}
+PatternMake {.*[.]dc} .cxx {[oldcache $target $d]} {
+  ::bras::updateCacheC \
+      $target [lindex $deps 0] CXX CXXDEPOPTS CXXDEPEXCLUDE
+}
+PatternMake {.*[.]dc} .cpp {[oldcache $target $d]} {
+  ::bras::updateCacheC \
+      $target [lindex $deps 0] CXX CXXDEPOPTS CXXDEPEXCLUDE
+}
+PatternMake {.*[.]dc} .c++ {[oldcache $target $d]} {
+  ::bras::updateCacheC \
+      $target [lindex $deps 0] CXX CXXDEPOPTS CXXDEPEXCLUDE
+}
+########################################################################
+########################################################################
+##### Local Variables: #
+##### mode:tcl #
+##### End: #

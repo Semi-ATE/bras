@@ -1,0 +1,226 @@
+########################################################################
+#
+# This brasfile is used to install bras from the source distribution. 
+#
+# Invoke processing of this file by typing
+#
+#   tclsh bras
+#
+# in the current directory. To change any of the following
+# installation directories, assign values on the command line like
+#
+#   tclsh bras prefix=/halli/galli
+#
+########################################################################
+getenv prefix /usr/local
+
+## Directory where to put the executable script
+getenv BINDIR [file join $prefix bin]
+
+## Directory where to put the manual page
+getenv MANDIR [file join $prefix man man1]
+
+## Directory where to put the package files (*.tcl and the like)
+## If you want to use bras as a packege loaded like
+##   package require bras
+## then [file dir] of this directory must be in your TCLLIBPATH or you
+## must explicitly add it to auto_path in your Tcl-script.
+getenv LIBDIR [file join $prefix lib bras-$::bras::VERSION]
+
+## Directory where to put assorted documentation files
+getenv DOCDIR [file join $prefix doc bras-$::bras::VERSION]
+
+## You may explicitely override this on the command line with
+## something like
+##    TCLSH=mytclsh
+## The value is entered into the main script to allow UNIX-like start
+## of the script as an executable file.
+getenv TCLSH tclsh8.0
+
+########################################################################
+## A sanity check to avoid installation with an old version of bras
+## which would result in old version numbers to be used for directory
+## names.
+if {$::bras::base!="."} {
+  puts stderr "Please use ./bras to make sure to have the correct version"
+  exit 1
+}
+
+## A sanity check to avoid use of relative directory names.
+foreach x [list BINDIR LIBDIR MANDIR DOCDIR] {
+  if {[file pathtype [set $x]]=="relative"} {
+    puts stderr "Relative pathname `[set $x]'"
+    puts stderr "for $x will not work. Please use absolute pathname."
+    exit
+  }
+}
+include [file join $::bras::base install.rule]
+
+## Lists of files we want to install
+set BINTARGETS [file join $BINDIR bras 0755]
+
+## Collect all the files to go into LIBDIR
+foreach f [glob *.tcl *.rule] {
+  lappend LIBTARGETS [file join $LIBDIR $f 0644]
+}
+#puts $LIBTARGETS
+## Collect targets to got to DOCDIR
+foreach f {bras.tex bras.ps bras.pdf COPYING-2.0 \
+	       recu-make-cons-harm.ps.gz bras.1.html} {
+  lappend DOCTARGETS [file join $DOCDIR $f 0644]
+}
+lappend DOCTARGETS [file join $DOCDIR examples 0755]
+
+set MANTARGETS [file join $MANDIR bras.1 0644]
+
+set ALLTARGETS [concat $BINTARGETS $LIBTARGETS $DOCTARGETS $MANTARGETS]
+
+
+searchpath {. doc}
+
+########################################################################
+
+## rpm and stow support:
+## We need a target which merely fixes
+## bras and bras.1 by entering some paths. This supports installation
+## schemes where building is performed with a different prefix than
+## installation, like rpm and stow.
+Make all {[updated {bras.fixed bras.1.fixed bras.1.html.fixed}]} .relax.
+
+## Delegate work to every target to be installed by means of the
+## pattern rule for installation loaded above from install.rule
+Make install {[updated $ALLTARGETS]} .relax.
+
+## Here we create bras.fixed, a version of bras only used during
+## installation. It will have $LIBDIR edited into the right place.
+Newer bras.fixed {bras} {
+  set out [open bras.fixed w]
+  forfile {line n} bras {
+    if {$n==3} {
+      puts $out "exec $TCLSH \"\$0\" \${1+\"\$@\"}"
+      continue
+    }
+    switch -glob -- $line {
+      "set ::bras::base*" {
+	puts $out "set ::bras::base $LIBDIR"
+      }
+      default {
+	puts $out $line
+      }
+    }
+  }
+  close $out
+}
+
+## Here we create bras.1.fixed to enter $DOCDIR into bras.1
+Newer bras.1.fixed bras.1 {
+  set out [open bras.1.fixed w]
+  forfile line bras.1 {
+    if {[string match *|DOC|* $line]} {
+      regsub -all {\|DOC\|} $line $DOCDIR line
+    } elseif {[string match *|VERDATE|* $line]} {
+      regsub -all {\|VERDATE\|} $line $bras::VERDATE line
+    } elseif {[string match *|VERSION|* $line]} {
+      regsub -all {\|VERSION\|} $line $bras::VERSION line
+    }
+    puts $out $line
+  }
+  close $out
+}
+
+Newer bras.1.html.fixed bras.1.html {
+  set out [open $target w]
+  forfile line [lindex $deps 0] {
+    if {[string match *|DOC|* $line]} {
+      regsub -all {\|DOC\|} $line $DOCDIR line
+    } elseif {[string match *|VERDATE|* $line]} {
+      regsub -all {\|VERDATE\|} $line $bras::VERDATE line
+    } elseif {[string match *|VERSION|* $line]} {
+      regsub -all {\|VERSION\|} $line $bras::VERSION line
+    }
+    puts $out $line
+  }
+  close $out
+}
+
+Always clean {} {
+  eval file delete -force [glob -nocomplain *.fixed] shutupfiledelete
+}
+########################################################################
+proc forfile {varnames filename rexp {script {}} } {
+  ## If script is empty, this in fact means rexp is empty and we use
+  ## whatever we find in rexp as script.
+  if {![string length $script]} {
+    set script $rexp
+    set rexp {}
+    set all 1
+  } else {
+    set all 0
+  }
+
+  ## link varnames to caller's frame
+  switch [llength $varnames] {
+    1 #relax
+    2 {
+      upvar [lindex $varnames 1] lno
+    }
+    default {
+      return -code error \
+	  "first parameter may only have one or two elements"
+    }
+  }
+  upvar [lindex $varnames 0] line
+
+
+  ## open the file if this is not a file descriptor
+  if {[catch {fconfigure $filename}]} {
+    set in [open $filename r]
+    set close {close $in}
+  } else {
+    set in $filename
+    set close \#
+  }
+
+  set lno 0
+  while {-1!=[gets $in line]} {
+    incr lno
+    ## skip unwanted lines
+    if {!$all && ![eval regexp [list $rexp] [list $line]]} continue
+
+    ## evaluate body 
+    set code [catch {uplevel $script} result]
+
+    ## treat return code of body
+    # Copied from tcl.h as a reminder.
+    # Why does catch not return the same codes as return does, at least
+    # for those predifined codes?
+    # define TCL_OK          0
+    # define TCL_ERROR       1
+    # define TCL_RETURN      2
+    # define TCL_BREAK       3
+    # define TCL_CONTINUE    4       
+
+    switch -exact -- $code {
+      0 {}
+      1 {
+	catch {eval $close}
+	global errorInfo
+	#puts "((($errorInfo)))[llength $errorInfo]"
+	regsub "\n *\\(\"uplevel.*" $errorInfo {} errorInfo
+	return -code error -errorinfo $errorInfo $result
+      }
+      2 {
+	eval $close
+	return -code return $result
+      }
+      3 break
+      4 {}
+    }
+  }
+  eval $close
+
+  return {}
+}
+
+
+  

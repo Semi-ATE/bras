@@ -1,0 +1,179 @@
+#!/bin/sh
+# \
+exec tclsh "$0" ${1+"$@"}
+
+########################################################################
+#
+# This file is part of bras, a program similar to the (in)famous
+# `make'-utitlity, written in Tcl.
+#
+# Copyright (C) 1996-2000 Harald Kirsch
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# $Revision: 1.40 $, $Date: 2002/01/20 21:44:38 $
+########################################################################
+
+##
+## This is the driver file which tries to mimic the command line
+## behaviour of `make' as much as possible.
+##
+
+########################################################################
+## Set up the environment to work on. We make sure that the path were
+## bras was installed is available in ::bras::base and is the first
+## one in auto_path.
+##
+namespace eval ::bras {}
+set ::bras::base [file dir [info script]]
+set auto_path [concat $::bras::base $auto_path]
+package require bras
+namespace import ::bras::\[A-Za-z\]*
+
+########################################################################
+proc ::bras::usage {} {
+  global argv0 VERSION VERDATE
+  puts stderr \
+      "usage: $argv0 \[-f brasfile\] \[-d\] \[-h\] \[-n\] \[-p\]\
+\[-s\] \[-v\] \[-ve\] \[var=value]\
+\[--\] \[target ...\]
+construct files based on a rule-file
+  brasfile - rule-file to use (defaults: Brasfile or brasfile)
+        -d - show reasoning in addition to normal processing
+       -de - don't try to fix error messages (mainly to debug bras)
+        -k - continue as much as possible after an error
+        -n - don't execute any commands (implies -v)
+        -p - print database of rules, then exit
+        -s - don't show anything except error messages
+        -v - show all commands to be executed
+       -ve - use verbose version of exec
+        -- - use the rest of the command-line as target list
+             (necessary, if a target starts with `-')
+ var=value - just before starting to read brasfiles, element var of
+             the global array env is set to value
+    target - target to be rebuilt (default: the target of the first
+             rule in brasfile)
+
+This is version $::bras::VERSION, shipped on $::bras::VERDATE.
+"
+  exit 1
+}
+########################################################################
+proc ::bras::main {argc args} {
+  global env
+  set options(-p) 0
+  set options(=) {}
+  for {set i 0} {$i<$argc } {} {
+    set opt [lindex $args $i]
+    incr i
+    switch -glob -- $opt {
+      -d -
+      -de -
+      -s -
+      -v -
+      -k -
+      -n -
+      -ve {::bras::configure $opt}
+      -p {set options(-p) 1}
+      -f {
+	if {$i>=$argc } {
+	  puts stderr "$bras: missing file name after option `$opt'"
+	  exit 1
+	}
+	set brasfile [lindex $args $i]
+	incr i
+      }
+      -- {
+	for {} {$i<$argc} {incr i} {
+	  lappend targets [lindex $args $i]
+	}
+      }
+      -* ::bras::usage
+      default {
+	if {[string match *=* $opt]} {
+	  lappend options(=) $opt
+	} else {
+	  lappend targets $opt
+	}
+      }
+    }
+  }
+
+  ## Set env-entries from the command line
+  foreach equ $options(=) {
+    set var {}
+    set value {}
+    regexp {(.*)=(.*)} $equ dummy var value
+    if {$::bras::Opts(-v)} {puts "setting `env($var)' to `$value'"}
+    set env($var) $value
+  }
+
+  ## Find out which rule file to use
+  if {![info exists brasfile]} {
+    ## option -f was not used
+    if {[file exists brasfile]} {
+      set ::bras::Brasfile brasfile
+    } elseif {[file exists Brasfile]} {
+      set ::bras::Brasfile Brasfile
+    } else {
+      puts stderr "bras: no brasfile found"
+      exit 1
+    }
+  } else {
+    set ::bras::Brasfile $brasfile
+  }
+
+  ## Read the rule file
+  #include $::bras::Brasfile
+  if {[catch {include @.}]} {
+    return -code error -errorinfo [fixErrorInfo 2 ""]
+  }
+
+  if {$options(-p)} {
+    ::bras::dumprules
+    exit 0
+  }
+
+  ## Check if there is a target to consider
+  if {![info exist targets]} {
+    if {![info exist ::bras::Targets]} {
+      puts stderr "bras: no target given"
+      exit 1
+    }
+    foreach {startdir targets} $::bras::Targets break
+  }
+
+  ## We (may) have to change to another directory before we start
+  if {[info exist startdir]} {cd $startdir}
+  if {!$::bras::Opts(-s) && !$::bras::Opts(-d)} {
+    report norm "cd [pwd]"
+  }
+
+  
+  if {[catch {::bras::consider $targets}]} {
+    return -code error -errorinfo [fixErrorInfo 0 ""]
+  }
+}
+########################################################################
+if { [catch "::bras::main $argc $argv" result] } {  
+  puts stderr [::bras::fixErrorInfo 2 ""]
+  puts stderr "    invoked from within\n\"bras\""
+  exit 1
+}
+########################################################################
+
+##### Local Variables: #
+##### mode:tcl #
+##### End: #

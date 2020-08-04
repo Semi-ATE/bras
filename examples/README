@@ -1,0 +1,38 @@
+This directory contains examples of brasfiles. Normally you want to
+
+a) make sure you are allowed to write into that subdirectory, e.g. by
+copying it to you home directory, if you find this file installed by
+some admin,
+
+b) read the brasfile itself. They are heavily documented and point you 
+to the demonstrated features.
+
+The following examples are available:
+
+dirns --
+  demonstrates how directory related namespaces work
+
+install --
+  is an example for the use of the pattern rule in install.rule.
+
+javacompile --
+  shows how to compile java sources and how to create a .jar
+
+multiplatform1 --
+  shows a tiny setup to handle multi-platform builts.
+
+newpredicate -- 
+  demonstrates how to write a new predicate (test) to use in rules.
+
+updated --
+  a slight variation on the predicate [older] is [updated]. In
+  combination with the pseudo-command .relax. it behaves similar to
+  gnu make's .PHONY targets.
+
+varchanged --
+  demonstrates how to use the predicate [varchanged], which returns true 
+  if a variable's value was changed. In addition it contains a small
+
+
+Have fun,
+  Harald Kirsch

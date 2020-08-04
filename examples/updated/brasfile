@@ -1,0 +1,109 @@
+########################################################################
+# Demonstrate the use of predicate [updated] together with do-nothing
+# marker .relax.
+#
+# It is not necessary for a target to be a file. In fact, a target is
+# nothing but a name and only the context of the rule it is used in
+# determines whether it denotes a file or not.
+#
+# Very convenient are targets which serve as shortcuts to trigger a 
+# bunch of other targets. Typical examples are `all', `doc' or `libs'
+# which are called on the command line to initiate elaborate builts. 
+#
+# These shortcuts differ in two ways from "normal" file targets:
+#
+#  1) They do not denote a file. Consequently the [older] predicate is
+#  always fooled into deriving that the shortcut is out-of-date ---
+#  because the target file never exists. As a remedy, since bras 1.1.0,
+#  the predicate [updated] is available. It renders a target
+#  out-of-date only, if any of its dependencies needs an update. The
+#  example below demonstrates this.
+#
+#  2) Even if a shortcut's dependencies are updated rendering the
+#  shortcut target out of date, there is often nothing to do for the
+#  target. Consequently the rule's command stays (almost) empty,
+#  i.e. conatains only blank space (a totally empty command triggers a 
+#  warning message). Nevertheless, bras reports that the target is
+#  made with a message like
+#    # making `all'
+#  This can sometimes be annoying. To get rid of it, since 1.2.0,
+#  a rule's command can be the string ".relax." possibly surrounded by 
+#  whitespace to tell bras that there is nothing to do and that no
+#  report about `making' needs to be printed.
+#
+# Both, [updated] and ".relax." are demonstrated below.
+#
+#
+# You should run bras a few times with target `all', while deleting
+# some or all of the generated files p1, p2, d1, d2 in between to see
+# what happens.
+#
+# You should see that:
+#
+# 1) Neither `progs' nor `docs' is ever reported to be made. This is
+# due to the .relax. instead of a command.
+#
+# 2) When running bras a 2nd time without deleting any files in
+# between, nothing is made although none of `all', `progs' or `docs'
+# is an existing file. This is due to the [updated] used as the
+# predicate rather than [older].
+#
+# 3) Although .relax. suppresses messages about `progs' or `docs'
+# being made, `all' gets reported if they are out of date and has its
+# command run.
+#
+#
+# (C) 2001 Harald Kirsch
+# $Revision: 1.4 $, $Date: 2002/01/06 15:19:08 $
+########################################################################
+
+Always Please_read_the_brasfile {} {
+  ::bras::configure -s
+  append msg \
+      "Please read the comments in `brasfile' to see what this " \
+      "example does.\n" \
+      "In short:\n" \
+      "  1) run ../../bras all\n" \
+      "  2) read its output\n" \
+      "  3) delete one or more of the generated files p1, p2, d1, d2\n" \
+      "  4) goto 1"
+  puts $msg
+}
+
+## Our main target does `all' there is to do. Note that it fires
+## correctly although progs as well as docs have .relax.-commands. The 
+## .relax. does not prevent the results of reasoning to be passed
+## upward.
+Make all {[updated [list progs docs]]} {
+  puts "some parts of the system were updated"
+}
+
+## A shortcut to make all programs. It is only intended to trigger the 
+## dependencies. No command needs to be run. However, if any of the
+## dependencies is updated, `progs' will be out-of-date and this will
+## be reported upwards to all, resulting in `all' too being
+## out-of-date. Consequently the command for `all' will be run.
+Make progs {[updated [list p1 p2]]} .relax.
+
+## Similar to `progs', this time for `docs'.
+Make docs {[updated [list d1 d2]]}  .relax.
+
+
+
+## Some dummy rules to create targets if they do not exist.
+Exist p1 {
+  close [open $target w]
+}
+Exist p2 {
+  close [open $target w]
+}
+Exist d1 {
+  close [open $target w]
+}
+Exist d2 {
+  close [open $target w]
+}
+
+Always clean {} {
+  file delete -force p1 p2 d1 d2
+}

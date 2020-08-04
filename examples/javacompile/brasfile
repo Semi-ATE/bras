@@ -1,0 +1,66 @@
+########################################################################
+#
+# Call this file with one of the following commands:
+#  ../../bras 
+#  ../../bras jar
+#  ../../bras run
+#
+# Be sure to read this file to understand what is going on.
+#
+# (C) 2002 Harald Kirsch
+#
+# $Revision: 1.1 $, $Date: 2002/02/23 18:38:11 $
+########################################################################
+
+## All .java files found in this directory are taken as source files
+set JAVA [glob *.java]
+
+## We also need the respective class files
+regsub -all {[.]java} $JAVA .class CLASSES
+
+## Java compiler and its flags. Set them on the command line of bras
+## like JAVAC=jikes JFLAGS="+E +P"
+getenv JAVAC javac
+getenv JFLAGS ""
+
+########################################################################
+## The Rules
+
+## The main (and default) target is a convenience link to compile all
+## java files. 
+Make classes {[updated $CLASSES]} .relax.
+
+## All class files are compiled with one command. In particular with
+## jikes, this is fast enough and currently probably the only 100%
+## safe way to get an update of all classes under all circumstances.
+Make $CLASSES {[pairedolder $CLASSES $JAVA]} {
+  $JAVAC $JFLAGS $deps
+}
+
+## This target makes the jar-file. We assume that the current
+## directory (called javacompile) is also the package directory for
+## package javaex. Consequently the parent directory is assumed to be a
+## directory typically found in a CLASSPATH, e.g. it contains package
+## directories.
+set PKGROOTDIR ..
+set PKGDIR [file tail [pwd]]
+set PKG javacompile
+set JAR [string toupper $PKG 0 0].jar
+
+Newer $JAR $CLASSES {
+  ::bras::packjar $target $PKGROOTDIR [list $PKG]
+}
+
+## A convenience link in order to be able to just call 'bras jar'
+Make jar {[updated $JAR]} .relax.
+
+
+## To run the main of class A, using the fresh .jar
+Make run {[true $JAR]} {
+  set env(CLASSPATH) $JAR
+  java javacompile.A
+}
+
+Make clean {[true]} {
+  eval file delete -force [glob -nocomplain *.class *.jar] keep_file_delete_happy
+}

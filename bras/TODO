@@ -1,0 +1,221 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30:
+
+Kill >@stdin and the like from -ve output.
+
+also requested by Tom Holroyd <tomh@po.crl.go.jp>.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30:
+
+add a path to search to [include]. Toying around with this idea for
+quite some time, but now also Tom Holroyd <tomh@po.crl.go.jp> asked
+for it. 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30:
+
+.brasrc to put e.g. ::bras::configure -ve 1 into it
+
+Proposed by Tom Holroyd <tomh@po.crl.go.jp>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30:
+
+Globbing for targets such that we can write things like
+
+  Make libs {[updated [globtarget lib*]]}
+  Make pack {[updated [globtarget pack-*]]} 
+
+where [globtargets] looks into the list of targets rather than the
+file system.
+
+In `make', targets are just files, in `bras' targets are just `names', 
+consequently [globtarget] would fit in quite well.
+
+proposed by: max@malva.com.ua
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30: DISMISSED
+
+predicate [follow] like this
+
+> proc follow args {
+>         ::bras::consider $args
+>         return 0
+> }
+
+Note that neither trigger nor deps is set.
+Proposed by Tom Holroyd <tomh@po.crl.go.jp>
+
+==> Like [true] (aka Always) this breaks
+the chain of reasoning which I consider a Bad Thing. Instead,
+[updated] should be used.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2001-09-30:
+
+Add predicate [exists] with glob-facilities. Comes in handy for target 
+clean when the existing files are entered into trigger. Might also be
+useful for .tex-compilation to depend on the existence on an .aux-file.
+
+Proposed by Tom Holroyd <tomh@po.crl.go.jp>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2000-05-25: DONE
+
+Add predicate varChanged as proposed in Mail to Nils from 2000-03-15.
+
+Add function forget.
+
+Make -ve reversible in configure.
+
+Allow output destination to be configured such that it is easy to be
+redirected into a widget.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2000-03-15:
+
+Write a bunch of small dedicated real world examples.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-06-03: DONE
+
+Why prerequisites? If the reasoning process can be called explicitely
+anytime, instead of
+
+   Newer bla.o {bla.c // hinzel kunzel jockel} {
+     just do it
+   }
+
+one can to
+
+   Newer bla.o bla.c {
+     consider [list hinzel kunzel jockel]
+     just do it
+   }
+   
+I'll probably remove the prerequisites stuff very soon.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+
+o Find out how to give every brasfile its own scope so that a variable
+  like SRC is not messed up, if it is used in several brasfiles.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+
+o Parallel execution (like make's -j)
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01: DONE, only (b) survived
+
+o Option to switch between the following modes:
+  a) Collect *all* commands first, then start executing
+  b) Start executing as soon as a command shows up. 
+     - Might be complicated in connection with targets which cannot be
+     made with their first rule.   
+     - Might conflict with option -d
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+o A check to test if there is a rule for a target.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+
+o Catch all-rules as pattern-rules
+>- This doesn't work either:
+>PatternNewer (.*\.a} {} {echo a}
+>
+>The idea would be a match anything rule for building libraries.. 
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+
+o Selective rule dumping for debugging purposes.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+
+o Allow the directories of @-dependencies to be mapped through one
+stage of indirection, so that @bla/ri/lu does not lead to bla/ri, but
+to $DIRMAP(bla/ri) or the like.
+
+--> Why? 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1999-01-01:
+o Suggestion from jgg@debian.org
+
+Ack, and a final thing. It would be nice to be able to assign dependancies
+to PatternRules, ie:
+
+PatternCDepends {\.deps/.*\.d$} .cc {// .deps} {
+
+So that .deps will be added to the prereq list.
+
+--> Obsolete since 0.99.0
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+This is done already (read from bottom to top):
+===============================================
+o More intelligent abseiling along a chain of pattern rule so that
+there is no need for intermediate targets to exist. (See more todos
+about pattern rules below)
+(Done, 1997-11-17)
+
+
+o Suggestion from jgg@debian.org. A better way to use pattern rules.
+
+Newer ../objs/t.o ../t.cc
+PatternNet {.*\.o} .cc {...}
+
+Will do this. when considering t.o
+  1) t.o has no command list, attempt to generate one with the pattern
+     rules
+  2) To do this is calles a new function Match.cc over all depends
+  3) by default Match.cc is a regx match of ".*\.cc" but can be user
+     overriden
+  4) If that finds a match then use that rule
+  5) If no match is found then switch to 'trying to find a match in the
+     file system' which is that same as if the Newer line didn't exist
+  6) Call Dep.cc to generate a filesystem name for the .cc file, see if it 
+     exists, if so use this rule.
+(Done, 1997-11-17. The function is called GenMatch. It does not look
+into the file system. If looking for a default command, there is
+already a rule, i.e there is a (probably empty) dependency list, so
+there is no need to consult the file system.)
+
+
+o Make -n really *DO NOTHING*. Move the current behaviour of -n to an
+option with another name.
+(Done, 1997-11-16, using -N for the old behaviour)
+
+o Silent operation, very silent operation.
+(Done, 1997-11-16, using -s and -ss)
+
+o Do I have the same problem for pattern rules?
+(Yes, corrected 1997-11-09)
+
+
+o BUG: defaultCmd considers pattern rules in the order in which they
+were entered. This way it is not possible to override a "standard"
+pattern rule with you own one. (Check doc regarding this.)
+(Corrected 1997-11-08).
+
+o BUG: SuffixNewer is mentioned in the html-files. (Should be
+Pattern...)
+(Corrected 1997-11-08).
+
